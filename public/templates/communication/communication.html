@@ -1,0 +1,174 @@
+
+<div class="dashboard-con settings">
+	<div class="top-container">
+            <div class="col-md-4 col-xs-4 top-links">
+                <div class="top-links-container ng-scope">
+                    <ul class="open-nav ng-scope">
+                        <li><a href="" class="ng-binding">Communication</a></li>
+                    </ul>
+                </div>     
+            </div>
+            <div class="col-md-6 col-xs-6 top-links product-search">
+                <div class="top-links-container ng-scope">
+                    <input type="text" class="form-control" ng-model="FilterProducts" placeholder="{{'S_exp_search_placeholder' | translate}}"/>
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </div>     
+            </div>
+            <div class="col-md-2 col-xs-2 top-btn cart-btn">
+                <span>Send SMS</span><button class="save ng-binding" type="submit" ng-click="new_exp()"><i class="fa fa-commenting-o"></i></button>
+            </div>
+        </div>
+        
+        
+        
+        <div class="col-md-12 col-sm-12 form-content" ng-scrollbars>
+          <div class="product-con">
+          <form ng-submit="" id="" class="products" ng-show="new_expense" name="" novalidate >
+            <div class="col-md-6">
+                <h3>Send SMS</h3>
+            </div>
+            <div class="col-md-6 top-btn inner-btns product-save">
+                <button class="save">{{'S_button_save' | translate}}</button>
+                <button class="cancel" ng-click="new_exp_Hide()">{{'S_button_cancel' | translate}}</button>
+            </div>
+            <div class="col-md-12">
+            	<div class="col-sm-6">
+                    <div class="col-sm-12">
+                        <div class="form-group mess">
+                            <label>Message</label>
+                            <textarea ng-model="product.note" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Last Business Visited</label>
+                            <select class="form-control" ng-model="product.tax">
+                                <option value="">N/A</option>
+                                <option ng-repeat="tax in taxList" value="{{tax.id}}">{{tax.name}} ({{tax.amount}}%)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Last Practitioner Seen</label>
+                            <select class="form-control" ng-model="product.tax">
+                                <option value="">N/A</option>
+                                <option ng-repeat="tax in taxList" value="{{tax.id}}">{{tax.name}} ({{tax.amount}}%)</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Had an appointment in the last</label>
+                            <select class="form-control" ng-model="product.tax">
+                                <option value="">N/A</option>
+                                <option ng-repeat="tax in taxList" value="{{tax.id}}">{{tax.name}} ({{tax.amount}}%)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-sm-12">
+                        <div class="form-group check-con online-booking">
+                            <div class="checkbox">
+                                <label>
+                                  <input type="checkbox"><span></span> Without upcoming appointment(s)
+                                </label>
+                            </div>
+                            <div class="sent_to">
+                                <p>This will be sent to all 2 of your patients with mobile numbers.</p>
+                                <p>Each message will cost 1 credit(s). It will be 2 credit(s) in total. You have 4 credits available.</p>
+                            </div>
+                      	</div>
+                     </div>
+                </div>
+             </div>
+        </form>
+        <div class="clearfix"></div>
+                 <accordion close-others="true">
+                    <accordion-group  ng-repeat="Expense in ExpenseList" is-open="Expense.isopen" class="my-group">
+                    <accordion-heading>
+                        <div class="productsdetails" style="outline:none"  ng-click="opened($index, Expense.id)">
+                           <div class="col-sm-2">{{'S_exp_label1' | translate}} : {{Expense.expense_date}}</div>
+                           <div class="col-sm-2">Patient : Mr.Anuj Dhima </div>
+                           <div class="col-sm-2">Practitoner : Mr.Jack</div>
+                           <div class="col-sm-6 text-right right">
+                              <label class="sent"><span>Sent</span></label>
+                              <!--<label class="sent pending"><span>Pending</span></-->
+                           </div>
+                       </div>
+                    </accordion-heading>
+                      <div ng-if="showExpenseDetails($index)" class="no-animate">
+                            <div class="ExpenseDetails" ng-show="ExpenseDetails">
+                                <div class="col-sm-12 productInfo sms-detail">
+                                	<div class="col-sm-4">
+                                        <h4>
+                                            <label>Time </label>
+                                            <span>10 Oct 2015,5:49 PM</span>
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h4>
+                                            <label>Patient</label>
+                                            <span>Mr.Anuj dhiman </span>                     
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h4>
+                                            <label>Type</label>
+                                            <span>SMS</span>
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h4>
+                                            <label>To</label>
+                                            <span>Mr. Jack</span>
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h4>
+                                            <label>Category</label>
+                                            <span>SMS Message</span>                                
+                                        </h4>
+                                    </div>
+                                   	<div class="col-sm-4">
+                                    <h4>
+                                        <label>From</label>
+                                        <span>Mr. Anuj</span>
+                                    </h4>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h4>
+                                            <label>Direction</label>
+                                            <span>Sent</span>                            
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h4>
+                                            <label>Sent Successfully</label>
+                                            <span>Yes</span>                       
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h4>
+                                            <label>Links</label>
+                                            <span>test test test</span>
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <h4>
+                                            <label>Message</label>
+                                            <span>test test test</span>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                      </div>
+                    </accordion-group>
+                  </accordion>
+          </div>
+        </div>
+</div>
+<style>.form-control{width:100% !important;}</style>

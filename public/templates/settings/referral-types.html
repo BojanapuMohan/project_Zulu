@@ -1,0 +1,64 @@
+<div class="dashboard-con settings">
+    <div class="top-container">
+        <div class="col-md-8 col-xs-6 top-links">
+            <div class="top-links-container" ng-include="'templates/settings/common/top-links.html'"></div>    
+        </div>
+        <div class="col-md-4 col-xs-6 top-btn">
+            <button class="save" type="submit">{{'S_button_update' | translate}}</button>
+            <button class="cancel">{{'S_button_cancel' | translate}}</button>
+            <button class="cancel">{{'S_button_delete' | translate}}</button>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 bus-con">
+        <div class="col-md-2 side-bar-con">
+            <div class="side-bar">
+                <div class="side-bar-header">
+                    <h5>{{'S_Referral_main_heading' | translate}}</h5>
+                    <a class="" ui-sref="">
+                    	<i class="ic bus-icn referral"></i>
+                    	<span>{{'S_tool-tip-addnew' | translate}}</span>
+                    </a>
+                </div>
+                <div class="side-bar-search">
+                    <form>
+                        <input type="text" class="form-control" placeholder="Search" />
+                        <button type="submit" disabled="disabled"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="side-bar-links" ng-scrollbars rebuild-on-resize>
+                	<ul>
+                    	<li><a href="">Contact</a></li>
+                    	<li><a href="">Other</a></li>
+                    	<li><a href="">Patient</a></li>
+                    	<li><a href="">Test</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" col-md-10 col-sm-10 form-content info-container " ng-scrollbars rebuild-on-resize>
+    	<div class="col-md-6">
+        	<h2 class="min-wid">{{'S_Referral_heading_ref_source' | translate}}
+            	<i class="ic info info-hover bottom">
+                    <span>{{'S_Referral_heading_ref_source-info' | translate}}</span>
+                </i>
+            </h2>
+              <div class="form-group ref">
+                <label>{{'S_Referral_label_ref' | translate}}</label>
+                <input type="text" class="form-control" placeholder="">
+              </div>
+              <div class="form-group sub-cat">
+              	<label>{{'S_Referral_label_sub' | translate}}</label>
+                <div class="ref-clone">
+                    <input type="text"  class="form-control" placeholder="{{'S_Referral_label_ref' | translate}}"/>
+                    <a href=""><i class="ic cross"></i></a>
+                </div>
+              </div>
+              <div class="form-group sub-btn">
+              	<a href="">{{'S_Referral_button_sub' | translate}}</a>
+              </div>
+        </div>
+    	<div class="col-md-6">
+        </div>
+    </div>
+</div>

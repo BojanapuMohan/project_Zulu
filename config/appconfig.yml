@@ -1,0 +1,7 @@
+development:
+  SECRET_KEY_BASE: 'development key here '
+stage:
+  SECRET_KEY_BASE: 'stage key here '
+
+production:
+  SECRET_KEY_BASE: "2041a74fcdc42ab1aa6798f541cacbe0cb41a206a996443d75b213387249d437d00eafff57a94cb43186d7b87aa45b5d8d4a3f34597dfc6452b57dd0a0eaf54c"

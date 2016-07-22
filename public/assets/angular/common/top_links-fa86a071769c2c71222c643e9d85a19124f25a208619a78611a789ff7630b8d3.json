@@ -1,0 +1,82 @@
+[
+  {
+    "title": "top_links_Account",
+    "link": "settings.account"
+  },
+  {
+    "title": "top_links_Business_Information",
+    "link": "settings.business"
+  },
+  {
+    "title": "top_links_Users_Practitioners",
+    "link": "settings.users"
+  },
+  {
+    "title": "top_links_Online_Booking",
+    "link": "settings.online-booking"
+  },
+  {
+    "title": "top_links_Discount_Types",
+    "link": "settings.discount-types"
+  },
+  {
+    "title": "top_links_Billable_Items",
+    "link": "settings.billable-items"
+  },
+  {
+    "title": "top_links_Appointment_Types",
+    "link": "settings.appointment"
+  },
+  {
+    "title": "top_links_Payments_Types",
+    "link": "settings.payment-types"
+  },
+  {
+    "title": "top_links_Recall_Types",
+    "link": "settings.recall-types"
+  },
+  {
+    "title": "top_links_Taxes",
+    "link": "settings.taxes"
+  },
+  {
+    "title": "top_links_Treatments_Note_Templates",
+    "link": "settings.treatment-notes"
+  },
+  {
+    "title": "top_links_Letter_Templates",
+    "link": "settings.letter-templates"
+  },
+  {
+    "title": "top_links_Referral_Types",
+    "link": "settings.referral-types"
+  },
+  {
+    "title": "top_links_Invoice_Setting",
+    "link": "settings.invoice"
+  },
+  {
+    "title": "top_links_Documents_Printing",
+    "link": "settings.document-and-printing"
+  },
+  {
+    "title": "top_links_SMS_Setting",
+    "link": "settings.sms-setting"
+  },
+  {
+    "title": "top_links_Appointment_Reminders",
+    "link": "settings.appointment-reminders"
+  },
+  {
+    "title": "top_links_Data_Exports",
+    "link": "settings.data-export"
+  },
+  {
+    "title": "top_links_Data_Imports",
+    "link": "settings.data-imports"
+  },
+  {
+    "title": "top_links_Zulu_Subscription",
+    "link": "settings.subscription"
+  }  
+]

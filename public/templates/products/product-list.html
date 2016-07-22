@@ -1,0 +1,334 @@
+ <form ng-submit="productForm.$valid && AddProduct(product)" id="productForm" class="products" ng-show="new_product" name="productForm" novalidate >
+	<div class="col-md-6">
+    	<h3>&nbsp;</h3>
+    </div>
+    <div class="col-md-6 top-btn inner-btns product-save">
+    	<button class="save">{{'S_button_save' | translate}}</button>
+        <button class="cancel" type="button" ng-click="AddProductHide()">{{'S_button_cancel' | translate}}</button>
+    </div>
+    <div class="col-md-12">
+        <div class="col-sm-5">
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>{{'S_product_label_serial' | translate}}</label>
+                        <input type="text" class="form-control" ng-model="product.serial_no" />
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                    <div class="form-group">
+                        <label>{{'S_product_label_item' | translate}}</label>
+                        <input type="text" class="form-control" ng-model="product.item_code"/>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>{{'S_product_label_price' | translate}}</label>
+                        <input type="text" class="form-control" ng-model="product.price" required/>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>{{'S_product_label_tax' | translate}}</label>
+                        <select class="form-control" ng-model="product.tax">
+                            <option value="">N/A</option>
+                            <option ng-repeat="tax in taxList" value="{{tax.id}}">{{tax.name}} ({{tax.amount}}%)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group check-con online tax-include">
+                        <div class="checkbox">
+                            <label>
+                              <input type="checkbox" ng-model="product.include_tax"><span></span> {{'S_product_label_tax_option' | translate}}
+                            </label>
+                        </div>
+                  </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>{{'S_product_label_cost' | translate}}</label>
+                        <input type="text" class="form-control" ng-model="product.cost_price"/>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>{{'S_product_label_stock' | translate}}</label>
+                        <input type="text" class="form-control" ng-model="product.stock_number" />
+                    </div>
+                </div>
+    
+        </div>
+        <div class="col-sm-7">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>{{'S_product_label_pro' | translate}}</label>
+                    <input class="form-control" type="text" ng-model="product.name" required/>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>{{'S_product_label_sup' | translate}}</label>
+                    <input class="form-control" type="text" ng-model="product.supplier" />
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group notes-box">
+                    <label>{{'S_product_label_note' | translate}}</label>
+                    <textarea ng-model="product.note" class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+     </div>
+	
+</form>
+ 
+ 
+ <accordion close-others="true">
+    <accordion-group  ng-repeat="Product in ProductsList | filter:FilterProducts" is-open="Product.isopen" class="my-group">
+    <accordion-heading>
+    	<div class="productsdetails" style="outline:none"  ng-click="opened($index, Product.id)">
+	       <div class="col-sm-2"><span ng-if="Product.item_code">({{Product.item_code}})</span>{{Product.name}}</div>
+	       <div class="col-sm-2">{{'S_product_label_sup' | translate}} : {{Product.supplier}} </div>
+	       <div class="col-sm-2">{{'S_product_label_ex' | translate}} : {{Product.price_exc_tax}}</div>
+	       <div class="col-sm-2">{{'S_product_label_inc' | translate}} : {{Product.price_inc_tax}}</div>
+	       <div class="col-sm-4 text-right">
+            <button class="pro-value"><i class="basket"></i> {{Product.stock_number}}</button>
+            <button class="" ng-click="DeleteProduct(Product.id, $event)"><i class="fa fa-trash"></i></button>
+	       </div>
+	   </div>
+    </accordion-heading>
+      <div ng-if="showProductDetails($index)" class="no-animate">
+      		<div class="StockAdjustmentList" ng-show="stockadjustment">
+            	<div class="col-sm-6 productInfo">
+                    <h4>
+                        <label>{{'S_product_label_pro' | translate}}</label>
+                        <span>{{Product.name}}</span>
+                    </h4>
+                    <h4>
+                        <label>{{'S_product_label_item' | translate}}</label>
+                        <span>{{Product.item_code}}</span>
+                    </h4>
+                    <h4>
+                        <label>{{'S_product_label_serial' | translate}}</label>
+                        <span>{{Product.serial_no}}</span>
+                    </h4>
+                    <h4>
+                        <label>{{'S_product_label_sup' | translate}}</label>
+                        <span>{{Product.supplier}}</span>
+                    </h4>
+                    <h4>
+                        <label>{{'S_product_label_ex' | translate}}</label>
+                        <span>{{Product.price}}</span>
+                    </h4>
+                    <h4>
+                        <label>{{'S_product_label_tax' | translate}}</label>
+                        <span ng-if="Product.tax"  ng-repeat="taxes in taxList | filter:{id : Product.tax}">{{taxes.name}} ({{taxes.amount}})<span>
+                    </h4>
+                    <h4>
+                        <label>{{'S_product_label_cost' | translate}}</label>
+                        <span>{{Product.cost_price}}</span>
+                    </h4>
+                    <h4>
+                        <label>{{'S_product_label_stock' | translate}}</label>
+                        <span>{{Product.stock_number}}</span>
+                    </h4>
+                    <h4>
+                        <label>Notes</label>
+                        <span>{{Product.note}}</span>
+                    </h4>
+                </div>
+                <div class="col-sm-6 pull-right edit-product">
+			       	<button class="ng-binding" ng-click="EditProdcut($index)"><i class="fa fa-edit"></i>{{'S_product_btn_pro' | translate}}</button>
+			       	<button class="ng-binding " ng-click="EditStock($index)"><i class="fa fa-edit"></i> {{'S_product_btn_stock' | translate}}</button>
+                </div>
+      			
+      			<div class="clearfix"></div>
+		      	<h3 class="stock-adjust">{{'S_product_label_stockA' | translate}} <span>({{ProductStocks.length}})</span></h3>
+                <div ng-if="!ProductStocks.length">There are no stock adjustments for test. You can set the initial stock by <a href="" ng-click="EditProdcut($index)">editing this product.</a></div>
+		      	<table class="table table-responsive product-list" ng-if="ProductStocks.length">
+		      		<thead>
+		      			<tr>
+		      				<th>{{'S_product_table_heading1' | translate}}</th>
+		      				<th>{{'S_product_table_heading2' | translate}}</th>
+		      				<th>{{'S_product_table_heading3' | translate}}</th>
+		      				<th>{{'S_product_table_heading4' | translate}}</th>
+		      				<th>{{'S_product_table_heading5' | translate}}</th>
+		      			</tr>
+		      		</thead>
+		      		<tbody>
+		      			<tr ng-repeat="stockAdjustments in ProductStocks">
+		      				<td>{{stockAdjustments.stock_type}}</td>
+		      				<td>{{stockAdjustments.quantity}}</td>
+		      				<td>{{stockAdjustments.adjusted_at}}</td>
+		      				<td>{{stockAdjustments.adjusted_by}}</td>
+		      				<td>{{stockAdjustments.note}}</td>
+		      				
+		      			</tr>
+		      		</tbody>
+		      	</table>
+		      </div>
+	      	<div class="EditProduct angular-animate" ng-show="editProduct" >
+	      		<form ng-submit="productForm.$valid && UpdateProduct(Product, Product.id)" id="productForm" name="productForm" class="products remove-top" novalidate >
+                	<div class="col-md-6">
+                        <h3>({{Product.item_code}}){{Product.name}}</h3>
+                    </div>
+                    <div class="col-md-6 top-btn inner-btns update-inner">
+                        <button class="save" type="submit">{{'S_button_update' | translate}}</button>
+                        <button class="cancel" ng-click="backToStock();" type="button">{{'S_button_cancel' | translate}}</button>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-sm-5">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>{{'S_product_label_serial' | translate}}</label>
+                                    <input type="text" class="form-control" ng-model="Product.serial_no" />
+                                </div>
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="form-group">
+                                    <label>{{'S_product_label_item' | translate}}</label>
+                                    <input type="text" class="form-control" ng-model="Product.item_code"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>{{'S_product_label_price' | translate}}</label>
+                                    <input required type="text" class="form-control" ng-model="Product.price"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>{{'S_product_label_tax' | translate}} {{Product.tax}}</label>
+                                    <select class="form-control" ng-model="Product.tax">
+                                        <option value="">N/A</option>
+                                        <option  ng-selected="Product.tax == tax.id" ng-repeat="tax in taxList" value="{{tax.id}}">{{tax.name}} ({{tax.amount}}%)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group check-con online tax-include">
+                                    <div class="checkbox">
+                                        <label>
+                                          <input type="checkbox" ng-model="Product.include_tax"><span></span> {{'S_product_label_tax_option' | translate}}
+                                        </label>
+                                    </div>
+                              </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>{{'S_product_label_cost' | translate}}</label>
+                                    <input type="text" class="form-control" ng-model="Product.cost_price"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>{{'S_product_label_stock' | translate}}</label>
+                                    <p ng-show="showStocktext" class="stock_level">{{Product.stock_number}}</p>
+                                    <input class="form-control" type="text" ng-model="Product.stock_number" required ng-show="!showStocktext"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>{{'S_product_label_pro' | translate}}</label>
+                                    <input class="form-control" type="text" ng-model="Product.name" required/>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div clas="form-group">
+                                    <label>{{'S_product_label_sup' | translate}}</label>
+                                    <input class="form-control" type="text" ng-model="Product.supplier" />
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-group notes-box">
+                                    <label>{{'S_product_label_note' | translate}}</label>
+                                    <textarea ng-model="Product.note" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+					<div class="clearfix"></div>
+				</form>
+	      	</div>
+	      	<div class="StockAdjustment" ng-show="stockadjustmentEdit">
+	      		<form ng-submit="StockForm.$valid && UpdateStock(Stock, Product.id)" id="StockForm" name="StockForm" class="products remove-top" novalidate >
+                	
+                    <div class="col-md-6">
+                        <h3>{{'S_product_label_stock_level' | translate}}</h3>
+                    </div>
+                    <div class="col-md-6 top-btn inner-btns update-inner">
+                        <button class="save" type="submit">{{'S_button_update' | translate}}</button>
+                        <button class="cancel" ng-click="backToStock();" type="button">{{'S_button_cancel' | translate}}</button>
+                    </div>
+					<div class="clearfix"></div>
+                	<div class="col-md-4">
+                    	<div class="col-sm-12 increasing-radio">
+      						<div class="form-group">
+                                <label>{{'S_product_label_which_way' | translate}}</label>
+                                <div class="col-sm-6">
+                                    <div class="form-group medi radio-con">
+                                        <div class="radio">
+                                            <label class="ng-binding">
+                                              <input type="radio" ng-model="Stock.stock_level" name="stock_level" value="increasing"><span></span> {{'S_product_label_increase' | translate}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group medi radio-con">
+                                        <div class="radio">
+                                            <label class="ng-binding">
+                                              <input type="radio" ng-model="Stock.stock_level" name="stock_level" value="decreasing"><span></span> {{'S_product_label_decrease' | translate}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    	<div class="col-sm-12">
+                            <div class="form-group">
+                                <label>{{'S_product_label_type' | translate}}</label>
+                                <select ng-if="Stock.stock_level == 'increasing'" class="form-control" ng-model="Stock.stock_type" ng-init="Stock.stock_type = 'Stock Purchase'">
+                                    <option value="Stock Purchase">{{'S_product_label_type_option1' | translate}}</option>
+                                    <option value="Returned">{{'S_product_label_type_option2' | translate}}</option>
+                                    <option value="Other">{{'S_product_label_type_option3' | translate}}</option>
+                                </select>
+                                <select class="form-control" ng-if="Stock.stock_level == 'decreasing'" ng-model="Stock.stock_type" ng-init="Stock.stock_type = 'Damaged'">
+                                    <option value="Damaged">{{'S_product_label_type_option4' | translate}}</option>
+                                    <option value="Out of Date">{{'S_product_label_type_option5' | translate}}</option>
+                                    <option value="Item Sold">{{'S_product_label_type_option6' | translate}}</option>
+                                    <option value="Other">{{'S_product_label_type_option3' | translate}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>{{'S_product_label_howmany' | translate}}</label>
+                                <input type="text" ng-model="Stock.quantity" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                    	<div class="col-sm-12">
+                            <div class="form-group notes-box">
+                                <label>{{'S_product_label_note' | translate}}</label>
+                                <textarea ng-model="Stock.note" class="form-control"></textarea>
+                            </div>
+                         </div>
+					</div>
+                    </div>
+				</form>
+	      	</div>
+      </div>
+
+    </accordion-group>
+   
+  </accordion>
+
+
+
+

@@ -1,0 +1,58 @@
+<form ng-submit="settingSubmit(businessInfo)" name="accountSettings" class="no-animate" id="businessForm">
+    	<div class="col-md-6">
+        	<h2>{{'S_Bussiness_heading_Business_information' | translate}}</h2>
+              <div class="form-group">
+                <label>{{'S_Bussiness_business_name' | translate}}</label>
+                <input ng-model="businessInfo.name" type="text" class="form-control" placeholder="{{'S_Bussiness_business_name-placeholder' | translate}}">
+              </div>
+              <div class="form-group">
+                <label>{{'S_Bussiness_address' | translate}}</label>
+                <input ng-model="businessInfo.address" type="text" class="form-control" placeholder="{{'S_Bussiness_address_placeholdder' | translate}}">
+              </div>
+              <div class="form-group">
+                <label>{{'S_Bussiness_country' | translate}}</label>
+                <select ng-model="businessInfo.country"  class="form-control" ng-change="GetStates(businessInfo.country)"  ng-model="cntry">
+                   <option ng-selected="" ng-repeat="countries in country" value="{{countries.code}}">{{countries.name}}</option>
+                </select>
+              </div>
+              <div class="form-group col-xs-4 city-con">
+                <label>{{'S_Bussiness_city' | translate}}</label>
+                <input ng-model="businessInfo.city"  type="text" class="form-control" placeholder="{{'S_Bussiness_city' | translate}}">
+              </div>
+              <div class="form-group col-xs-4 city-con">
+                <label>{{'S_Bussiness_state' | translate}}</label>
+                <select ng-model="businessInfo.state"  class="form-control">
+                   <option ng-selected="" ng-repeat="states in state" value="{{states.code}}">{{states.name}}</option>
+                </select>
+              </div>
+              <div class="form-group col-xs-4 city-con">
+                <label>{{'S_Bussiness_postal' | translate}}</label>
+                <input ng-model="businessInfo.pin_code"  type="text"  class="form-control" placeholder="{{'S_Bussiness_postal-code' | translate}}"/>
+              </div>
+        </div>
+    	<div class="col-md-6">
+        	<h2 class="blank">&nbsp;</h2>
+        	  <div class="form-group name-num">
+                <label>{{'S_Bussiness_business_reg' | translate}}</label>
+                <input ng-model="businessInfo.reg_name"  type="text" class="form-control" placeholder="{{'S_Bussiness_klb_placeholder' | translate}}">
+                <input ng-model="businessInfo.reg_number"  type="text" class="form-control" placeholder="{{'S_Bussiness_url_placeholder' | translate}}">
+              </div>
+              <div class="form-group url">
+                <label>{{'S_Bussiness_web_url' | translate}}</label>
+                <input ng-model="businessInfo.web_url"  type="text" class="form-control" placeholder="{{'S_Bussiness_reg_placeholder' | translate}}">
+              </div>
+              <div class="form-group contact-info">
+                <label>{{'S_Bussiness_contact_info' | translate}}</label>
+                <textarea ng-modal="businessInfo.contact_info"  class="form-control"></textarea>
+              </div>
+              <div class="form-group check-con online">
+                <label>{{'S_Bussiness_online_booking' | translate}}</label>
+                <div class="checkbox">
+                    <label>
+                      <input ng-model="businessInfo.online_booking"  type="checkbox"><span></span> {{'S_Bussiness_online_booking_option' | translate}}
+                    </label>
+                </div>
+              </div>
+        </div>
+
+</form>

@@ -1,0 +1,38 @@
+<div class="dashboard-con settings">
+    <div class="top-container">
+        <div class="col-md-9 col-xs-6 top-links">
+            <div class="top-links-container" ng-include="'templates/settings/common/top-links.html'"></div>    
+        </div>
+        <div class="col-md-3 col-xs-6 top-btn">
+            <button class="save" type="submit" form="TaxForm">{{btnText | translate}}</button>
+            <button class="cancel">{{'S_button_cancel' | translate}}</button>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 bus-con">
+        <div class="col-md-2 side-bar-con">
+            <div class="side-bar">
+                <div class="side-bar-header">
+                    <h5>{{'S_Taxes_main_heading' | translate}}</h5>
+                    <a class="" ui-sref="settings.taxes.info({TaxID:'new'})">
+                    	<i class="ic bus-icn percent"></i>
+                    	<span>{{'S_tool-tip-addnew' | translate}}</span>
+                    </a>
+                </div>
+                <div class="side-bar-search">
+                    <form>
+                        <input type="text" class="form-control" placeholder="{{'S_placeholder-Search' | translate}}" />
+                        <button type="submit" disabled="disabled"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="side-bar-links" ng-scrollbarss rebuild-on-resize>
+                	<ul>
+                    	<li ng-repeat="Tax in TaxList"><a href="" ui-sref="settings.taxes.info({TaxID:Tax.id})" ui-sref-active="active">{{Tax.name}}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" col-md-10 col-sm-10 form-content info-container " ng-scrollbarss rebuild-on-resize>
+    	<div ui-view></div>
+    </div>
+</div>

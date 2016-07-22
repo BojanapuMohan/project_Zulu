@@ -1,0 +1,165 @@
+<div class="dashboard-con settings">
+	<form ng-submit="settingSubmit(account)">
+    	<div class="top-container">
+            <div class="col-md-12 col-xs-6 top-links">
+                <div class="top-links-container" ng-include="'templates/settings/common/top-links.html'"></div>     
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 form-content" ng-scrollbars rebuild-on-resize>
+        	<div class="col-md-6 subscription">
+            	<h2 class="section-title">{{'S_zulu_heading' | translate}}</h2>
+                <div class="form-group ">
+                	<h4>{{'S_zulu_label_sub' | translate}} <span>{{'S_zulu_label_sub_span' | translate}}</span></h4>
+                    <label>{{'S_zulu_label_current' | translate}}</label>
+                    <p>{{subscriptDetails.current_plan}}</p>
+                    <label>{{'S_zulu_label_prac' | translate}}</label>
+                    <p>{{subscriptDetails.avail_practi}} out of maximum {{subscriptDetails.max_practi}} practitioners in use.</p>
+                    <label>{{'S_zulu_label_nextbilling' | translate}}</label>
+                    <p>{{subscriptDetails.next_billing_date}}</p>
+                    <label>{{subscriptDetails.category}} {{'S_zulu_label_fee' | translate}}</label>
+                    <p>${{subscriptDetails.fee}} USD</p>
+                    <strong>{{'S_zulu_label_not-reg' | translate}}
+                    	<i class="ic info info-hover">
+                            <span>{{'S_zulu_label_not-reg_info' | translate}}</span>
+                        </i>
+                    </strong>
+                    <a href="" ng-click="openCardUpdate()">{{'S_zulu_label_a_updatecard' | translate}}</a>
+                </div>
+                <div class="form-group hide-app">
+                	<div class="col-md-6">
+                    	<label>{{'S_zulu_label_wantto' | translate}}
+                        	<i class="ic info info-hover">
+                                <span>{{'S_zulu_label_wantto_info' | translate}}</span>
+                            </i>
+                        </label>
+                        <a href="" ng-click="cancelCardUpdate()">{{'S_zulu_label_a_cancelzulu' | translate}}</a>
+                    </div>
+                    <div class="col-md-6 happens">
+                    	<label>{{'S_zulu_label_whathappn' | translate}}
+                        	<i class="ic info info-hover">
+                                <span>{{'S_zulu_label_whathappn_info' | translate}}</span>
+                            </i>
+                        </label>
+                    </div>
+               </div>
+           </div>
+            <div class="col-md-6 plan">
+            	<div class="form-group">
+                	<div class="col-md-6">
+                    	<h2>{{'S_zulu_label_change' | translate}}
+                        	<i class="ic info info-hover bottom">
+                                <span>{{'S_zulu_label_change_info' | translate}}</span>
+                            </i>
+                        </h2>
+                        <p>{{'S_zulu_label_pricein' | translate}}</p>
+                    </div>
+                    <div class="col-md-6 plan-type">
+                        <select class="form-control" ng-model="planCat">
+                        	<option value="Monthly">{{'S_zulu_label_plan_option1' | translate}}</option>
+                            <option value="Yearly">{{'S_zulu_label_plan_option2' | translate}}</option>
+                        </select>
+                    	<label>{{'S_zulu_label_plan' | translate}}</label>
+                    </div>
+                 </div>
+                 <div class="table-responsive">
+                 	<table class="table">
+                    	<thead>
+                        	<tr>
+                            	<th>{{'S_zulu_table_heading1' | translate}}</th>
+                            	<th>{{'S_zulu_table_heading2' | translate}}</th>
+                            	<th>{{'S_zulu_table_heading3' | translate}}</th>
+                            	<th>{{'S_zulu_table_heading4' | translate}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="angular-animate" ng-repeat="subscriptions in subscriptionList | filter:{category:planCat}">
+                                <td><span>{{subscriptions.name}}</span></td>
+                                <td><span>{{subscriptions.no_doctors}}</span></td>
+                                <td><span>${{subscriptions.price}}</span></td>
+                                <td ng-if="!subscriptions.not_available">
+                                    <a ng-if ="!subscriptions.is_selected" href="" class="select-plan" ng-click="SelectPlane(subscriptions.id)">{{'S_zulu_table_a1' | translate}}</a>
+                                    <strong ng-if ="subscriptions.is_selected">{{'S_zulu_table_a2' | translate}}</strong>
+                                </td>
+                                <td ng-if="subscriptions.not_available"><a href="" class="not-availble">{{'S_zulu_table_a3' | translate}}</a></td>
+                            </tr>
+
+                        	<!-- <tr>
+                            	<td><span>Solo</span></td>
+                                <td><span>1</span></td>
+                                <td><span>$45</span></td>
+                                <td><a href="" class="not-availble">Not Available</a></td>
+                            </tr> 
+
+                            <tr>
+                            	<td><span>Solo</span></td>
+                                <td><span>1</span></td>
+                                <td><span>$45</span></td>
+                                <td><strong>Current</strong></td>
+                            </tr>-->
+                           
+                        </tbody>
+                    </table>
+                 </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+<!-- Modal -->
+<script type="text/ng-template" id="CardUpdate.html">
+        <div class="modal-body confirm-body CardUpdate">
+		  <a href="" ng-click="cancel()" class="close-popup"></a>
+            <div class="confirm">
+                <form ng-submit="UpdateCard(cardDetails)">
+                   <div class="creditForm">
+                    <h2>{{'S_zulu' | translate}}</h2>
+                    <h4>{{cplane.current_plan}} ({{cplane.category}})</h4>
+                    <p class="creditEmail">johnkey@gmail.com</p>
+                    <div class="creditFromContent">
+                        <input type="text" placeholder="{{'S_zulu_sub_placeholder1' | translate}}" class="creditCardNo" ng-modal="cardDetails.card_number" />
+                        <input type="text" placeholder="{{'S_zulu_sub_placeholder2' | translate}}" class="creditMonth" ng-modal="cardDetails.expire_month" />
+                        <input type="text" placeholder="{{'S_zulu_sub_placeholder3' | translate}}" class="creditCVV"  ng-modal="cardDetails.card_cvv"/>
+                    </div>
+                   </div>
+                    <a href="" ng-click="okdelete()" class="save">{{'S_zulu_sub_update' | translate}}</a>
+                 </form>
+            </div>
+        </div>
+</script>
+
+<!-- Modal -->
+<script type="text/ng-template" id="cancelUpdate.html">
+        <div class="modal-body confirm-body CardUpdate">
+		  <a href="" ng-click="cancel()" class="close-popup"></a>
+            <div class="confirm">
+                <form ng-submit="CancelSubs(cancelsubs)">
+                   <div class="creditForm">
+                    <h2>{{'S_zulu_cancellation' | translate}}</h2>
+					<h3>{{'S_zulu_cancellation_info' | translate}}</h3>
+                    <div class="creditFromContent">
+                        <ul>
+                            <li ng-repeat="resons in resons">
+                                <div class="form-group medi radio-con">
+                                    <div class="radio">
+                                        <label>
+                                          <input type="radio" ng-model="cancelsubs.selected" name="cancel-type" value="{{resons.text}}"><span></span> {{resons.text}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </li>
+							
+						</ul>
+                    </div>
+					<h6>{{'S_zulu_share' | translate}}</h6>
+					<textarea class="form-control" ng-model="cancelsubs.reson_more"></textarea>
+                   </div>
+                    <button type="submit" class="save">{{'S_zulu_sub_update' | translate}}</button>
+                 </form>
+            </div>
+        </div>
+</script>

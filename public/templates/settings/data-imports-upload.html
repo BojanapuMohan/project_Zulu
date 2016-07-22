@@ -1,0 +1,23 @@
+<div class="dashboard-con settings">
+	<form ng-submit="settingSubmit(account)">
+    	<div class="top-container">
+            <div class="col-md-9 col-xs-7 top-links">
+                <div class="top-links-container" ng-include="'templates/settings/common/top-links.html'"></div>     
+            </div>
+            <div class="col-md-3 col-xs-5 top-btn import-btn">
+                <button class="save" type="submit">{{'S_import_button4' | translate}}</button>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 form-content" ng-scrollbars rebuild-on-resize>
+        	<div class="col-md-12">
+            	<p class="upload-info">{{'S_import_upload_p' | translate}}</p>
+                <div class="form-group col-md-6 col-xs-6 name-con clearfix">
+                    <label class="logo-com">{{'S_import_label_upload' | translate}}</label>
+                    <div class="img-con">
+                    	<img src="/assets/logo-img.png" alt="" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

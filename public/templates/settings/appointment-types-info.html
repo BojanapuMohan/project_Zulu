@@ -1,0 +1,126 @@
+<div ng-show="showAForm">
+
+          <form ng-submit="AppointmentForm.$valid && SubmitAppointment(AppointmentData)" id="AppointmentForm" name="AppointmentForm" novalidate >
+            <div class="col-md-6">
+              	<h2>{{'S_appointment_heading_editing' | translate}}</h2>
+                    <div class="form-group">
+                      <label>{{'S_label_name' | translate}}
+                      	<i class="ic info info-hover left-side">
+                              <span>{{'S_appointment_label_name_info' | translate}}</span>
+                          </i>
+                      </label>
+                      <input type="text" ng-model="AppointmentData.appointment_type.name" class="form-control" placeholder="{{'S_appointment_placeholder_name' | translate}}" required>
+                    </div>
+                    <div class="form-group">
+                      <label>{{'S_appointment_label_des' | translate}}</label>
+                      <input type="text" class="form-control" placeholder="{{'S_appointment_des_placeholder' | translate}}" ng-model="AppointmentData.appointment_type.description">
+                    </div>
+                    <div class="form-group col-xs-4 cat-con">
+                      <label>{{'S_appointment_label_cat' | translate}}
+                     		<i class="ic info info-hover left-side">
+                              <span>{{'S_appointment_cat_info' | translate}}</span>
+                          </i>
+                      </label>
+                      <input type="text" class="form-control" placeholder="{{'S_appointment_label_cat' | translate}}" ng-model="AppointmentData.appointment_type.category">
+                    </div>
+                    <div class="form-group col-xs-8 cat-con">
+                      <label>{{'S_appointment_label_dur' | translate}}</label>
+                      <select class="form-control" ng-model="AppointmentData.appointment_type.duration_time">
+                         <option ng-repeat="n in range(5,360,5)">{{n}}</option>
+                      </select>
+                    </div>
+                    <div class="form-group">
+                      <label>{{'S_appointment_label_default' | translate}}</label>
+                      <select class="form-control" ng-model="AppointmentData.appointment_type.default_note_template">
+                         <option value="N/A">N/A</option>
+                         <option ng-repeat="templates in TemplateNotes" value="{{templates.id}}">{{templates.name}}</option>
+                      </select>
+                    </div>
+                    <h2>{{'S_appointment_heading_editing_new' | translate}}</h2>
+                     <div class="form-group check-con online">
+                      <label>{{'S_appointment_label_select' | translate}}</label>
+                      <div class="service">
+                          <div class="checkbox" ng-repeat="doctors in AppointmentData.doctors">
+                              <label>
+                                <input type="checkbox" ng-model="doctors.is_selected"><span></span> {{doctors.first_name}} {{doctors.last_name}}
+                              </label>
+                          </div>
+
+                       </div>
+                    </div>
+                    
+              </div>
+          	<div class="col-md-6">
+              	<h2 class="blank">&nbsp;</h2>
+              	  <div class="form-group multiselect">
+                      <label>{{'S_appointment_label_R_product' | translate}}</label>
+                      <md-content class="md-padding multiple-sel" layout="column">
+                          <md-chips ng-model="AppointmentData.appointment_type.related_product" md-autocomplete-snap md-require-match="true">
+                            <md-autocomplete
+                                md-min-length="1"
+                                md-selected-item="selectedItemp"
+                                md-search-text="searchTextp"
+                                md-items="item in BilableItemsList"
+                                md-item-text="item.name"
+                                placeholder="Search">
+                              <span md-highlight-text="searchText">{{item.name}}</span>
+                            </md-autocomplete>
+                            <md-chip-template>
+                              <span>
+                                <em>{{$chip.name}}</em>
+                              </span>
+                            </md-chip-template>
+                          </md-chips>
+                        </md-content>
+                    </div>
+                    <div class="form-group multiselect">
+                      <label>{{'S_appointment_label_B_item' | translate}}</label>
+                      <md-content class="md-padding multiple-sel" layout="column">
+                          <md-chips ng-model="AppointmentData.appointment_type.billable_item" md-autocomplete-snap md-require-match="true">
+                            <md-autocomplete
+                            md-min-length="1"
+                                md-selected-item="selectedItem"
+                                md-search-text="searchText"
+                                md-items="item in BilableItemsList"
+                                md-item-text="item.name"
+                                placeholder="Search">
+                              <span md-highlight-text="searchText">{{item.name}}</span>
+                            </md-autocomplete>
+                            <md-chip-template>
+                              <span>
+                                <em>{{$chip.name}}</em>
+                              </span>
+                            </md-chip-template>
+                          </md-chips>
+                        </md-content>
+
+                    </div>
+                    <div class="form-group color-picker">
+                      <label>{{'S_appointment_label_select_color' | translate}}<span ng-click="openColors()" style="background:{{AppointmentData.appointment_type.color_code}}"></span></label>
+                      <input type="hidden" ng-model="AppointmentData.appointment_type.color_code" />
+                    </div>
+                    <div class="form-group check-con online">
+                      <label>{{'S_appointment_label_A_reminder' | translate}}</label>
+                      <div class="checkbox rem">
+                          <label>
+                            <input type="checkbox" ng-model="AppointmentData.appointment_type.confirm_email"><span></span> {{'S_appointment_label_option1' | translate}}
+                          </label>
+                      </div>
+                      <div class="checkbox rem">
+                          <label>
+                            <input type="checkbox" ng-model="AppointmentData.appointment_type.send_reminder"><span></span> {{'S_appointment_label_option2' | translate}}
+                            <a href="">{{'S_appointment_a_reminder' | translate}}</a>
+                          </label>
+                      </div>
+                    </div>
+                    <div class="form-group check-con online">
+                      <label>{{'S_appointment_label_show_online' | translate}}</label>
+                      <div class="checkbox">
+                          <label>
+                            <input type="checkbox" ng-model="AppointmentData.appointment_type.allow_online"><span></span>  {{'S_appointment_label_show_check' | translate}}
+                          </label>
+                      </div>
+                    </div>
+              </div>
+        </form>
+      </div>

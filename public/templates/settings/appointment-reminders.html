@@ -1,0 +1,201 @@
+<div class="dashboard-con settings">
+  <form ng-submit="settingSubmit(account)">
+    <div class="top-container">
+      <div class="col-md-8 col-xs-6 top-links">
+        <div class="top-links-container" ng-include="'templates/settings/common/top-links.html'"></div>
+      </div>
+      <div class="col-md-4 col-xs-6 top-btn">
+        <button class="save" type="submit">{{'S_button_save' | translate}}</button>
+        <button class="cancel">{{'S_button_cancel' | translate}}</button>
+        <button class="cancel">{{'S_button_delete' | translate}}</button>
+      </div>
+    </div>
+    <div class="col-md-12 col-sm-12 form-content reminder" ng-scrollbars rebuild-on-resize>
+      <div class="col-md-6">
+        <h2>{{'S_invoice_heading_general' | translate}}</h2>
+        <div class="form-group clear-div">
+          <div class="col-md-4 logo-height push-right">
+            <label>{{'S_reminder_label_default' | translate}} <i class="ic info info-hover left-side bottom"> <span>{{'S_reminder_label_default_info' | translate}}</span> </i> </label>
+            <div class="logo-height-con">
+              <select class="form-control">
+                <option>{{'S_option_none' | translate}}</option>
+                <option>{{'S_option_SMS' | translate}}</option>
+                <option>{{'S_option_email' | translate}}</option>
+                <option>{{'S_option_sms_email' | translate}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4 logo-height">
+            <label>{{'S_reminder_label_R_time' | translate}}</label>
+            <div class="logo-height-con">
+              <select class="form-control">
+                <option ng-repeat="n in range(0,23)">{{n}}</option>
+              </select>
+              <span>:00</span> </div>
+          </div>
+          <div class="col-md-4 logo-height check-con enable">
+            <label>{{'S_reminder_label_skip' | translate}} <i class="ic info info-hover bottom"> <span>{{'S_reminder_label_skip_info' | translate}}</span> </i> </label>
+            <div class="checkbox remove-margin">
+              <label class="enable-check ">
+                <input type="checkbox">
+                <span></span> </label>
+            </div>
+          </div>
+        </div>
+     </div>
+     <div class="col-md-6">
+        <h2 class="blank">&nbsp;</h2>
+        <div class="form-group clear-div">
+          <div class="col-md-4 logo-height push-right">
+            <label>{{'S_reminder_label_R_period' | translate}} <i class="ic info info-hover bottom"> <span>{{'S_reminder_label_R_period_info' | translate}}</span> </i> </label>
+            <div class="logo-height-con days-select">
+              <h6>{{'S_Online_label-min-option4' | translate}}</h6>
+              <select class="form-control">
+                <option ng-repeat="n in range(1,5)">{{n}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-8 check-con enable">
+            <label>&nbsp; </label>
+            <div class="checkbox remove-margin">
+              <label class="line-height-setting">
+                <input type="checkbox">
+                <span></span> {{'S_reminder_label_apply' | translate}}</label>
+            </div>
+          </div>
+       </div>
+    </div>
+    <div class="col-md-5">
+        <h2 class="hv-info">{{'S_reminder_heading_email' | translate}}
+        	<i class="ic info info-hover"> <span>{{'S_reminder_heading_email_info' | translate}}</span> </i>
+        </h2>
+        <div class="form-group clear-it">
+          <label>{{'S_reminder_label_E_sub' | translate}}</label>
+          <input type="text" class="form-control" placeholder="{{'S_reminder_label_E_sub_placehoolder' | translate}}" />
+        </div>
+   </div>
+   <div class="col-md-7">
+   		<h2 class="blank">&nbsp;</h2>
+          <div class="col-md-12 email-content">
+   			<label>{{'S_reminder_label_E_con' | translate}}</label>
+            <text-angular-toolbar ta-toolbar="[['h_1','h_2','normal','bold', 'italics', 'underline', 'ul', 'ol', 'indent', 'outdent'],['appointment', 'patient', 'practitioner', 'business'],]" name="toolbar"></text-angular-toolbar>
+          </div>
+   </div>
+   <div class="col-md-12 email-text-box">
+        <text-angular ng-model="data.htmlcontent" ta-target-toolbars='toolbar'></text-angular>
+   </div>
+   <div class="sample-email">
+   <div class="col-md-2">
+        <a href="" class="view-sample">{{'S_reminder_a_view' | translate}}</a>
+    </div>
+    <div class="col-md-5">
+        <div class="form-group check-con online">
+            <label>{{'S_reminder_label_A_cancel' | translate}}</label>
+            <div class="checkbox">
+                <label>
+                  <input type="checkbox"><span></span> {{'S_reminder_label_A_cancel_check' | translate}}
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="form-group check-con online">
+            <label>{{'S_reminder_label_hide' | translate}}</label>
+            <div class="checkbox">
+                <label>
+                  <input type="checkbox"><span></span> {{'S_reminder_label_hide_check' | translate}}
+                </label>
+            </div>
+        </div>
+    </div>
+    </div>
+   <div class="col-md-5" style="clear:both;">
+        <h2 class="hv-info">{{'S_reminder_heading_email_R' | translate}}
+        	<i class="ic info info-hover"> <span>{{'S_reminder_heading_email_R_info' | translate}}</span> </i>
+        </h2>
+        <div class="form-group clear-div">
+          <div class="col-md-8 logo-height">
+            <label>{{'S_reminder_label_E_sub' | translate}}</label>
+            <div class="logo-height-con">
+              <input type="text" class="form-control" placeholder="{{'S_reminder_label_E_sub_placehoolder' | translate}}">
+            </div>
+          </div>
+          <div class="col-md-4 logo-height check-con enable">
+            <label>{{'S_reminder_label_enable' | translate}}</label>
+            <div class="checkbox remove-margin">
+              <label class="enable-check ">
+                <input type="checkbox">
+                <span></span> </label>
+            </div>
+          </div>
+   		</div>
+    </div>
+   <div class="col-md-7">
+   		<h2 class="blank">&nbsp;</h2>
+          <div class="col-md-12 email-content">
+   			<label>{{'S_reminder_label_E_con' | translate}}</label>
+            <text-angular-toolbar ta-toolbar="[['h_1','h_2','normal','bold', 'italics', 'underline', 'ul', 'ol', 'indent', 'outdent'],['appointment', 'patient', 'practitioner', 'business'],]" name="toolbar1"></text-angular-toolbar>
+          </div>
+   </div>
+   <div class="col-md-12 email-text-box">
+        <text-angular ng-model="data.htmlcontent" ta-target-toolbars='toolbar1'></text-angular>
+   </div>
+   <div class="sample-email">
+   <div class="col-md-6">
+        <a href="" class="view-sample">{{'S_reminder_a_view' | translate}}</a>
+   </div>
+   <div class="col-md-6">
+        <div class="form-group check-con online">
+            <label>{{'S_reminder_label_A_cancel' | translate}}</label>
+            <div class="checkbox">
+                <label>
+                  <input type="checkbox"><span></span> {{'S_reminder_label_A_cancel_check' | translate}}
+                </label>
+            </div>
+        </div>
+    </div>
+    </div>
+   <div class="col-md-4">
+        <h2 class="hv-info">{{'S_reminder_heading_sms_R' | translate}}
+        	<i class="ic info info-hover"> <span>{{'S_reminder_heading_sms_R_info' | translate}}</span> </i>
+        </h2>
+        <div class="form-group clear-div">
+          <div class="logo-height check-con">
+            <div class="checkbox remove-margin sms-label">
+              <label class="enable-check">
+                <input type="checkbox">
+                <span></span> <strong>{{'S_reminder_label_enable_S' | translate}}</strong></label>
+            </div>
+          </div>
+   		</div>
+    </div>
+   <div class="col-md-8 sms-container">
+   		<h2 class="blank">&nbsp;</h2>
+          <div class="col-md-12 email-content">
+   			<label>{{'S_reminder_label_sms_text' | translate}}
+            <i class="ic info info-hover"> <span>{{'S_reminder_label_sms_text_info' | translate}}</span> </i>
+            </label>
+            <text-angular-toolbar ta-toolbar="[['appointment', 'patient', 'practitioner', 'business'],]" name="toolbar2"></text-angular-toolbar>
+          </div>
+   </div>
+   <div class="col-md-12 email-text-box">
+        <text-angular ng-model="data.htmlcontent" ta-target-toolbars='toolbar2'></text-angular>
+   </div>
+    <div class="sample-email">
+   <div class="col-md-6">
+        <a href="" class="view-sample">{{'S_reminder_a_view' | translate}}</a>
+   </div>
+   <div class="col-md-6">
+        <div class="form-group check-con online">
+            <label>{{'S_reminder_label_A_cancel' | translate}}</label>
+            <div class="checkbox">
+                <label>
+                  <input type="checkbox"><span></span> {{'S_reminder_label_A_cancel_check' | translate}}
+                </label>
+            </div>
+        </div>
+    </div>
+    </div>
+   
+  </form>
+</div>

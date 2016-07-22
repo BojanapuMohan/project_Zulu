@@ -1,0 +1,380 @@
+<div class="dashboard-con settings">
+	<div class="top-container">
+            <div class="col-md-4 col-xs-4 top-links">
+                <div class="top-links-container ng-scope">
+                    <ul class="open-nav ng-scope">
+                        <li><a href="" class="ng-binding">Contact</a></li>
+                    </ul>
+                </div>     
+            </div>
+            <div class="col-md-6 col-xs-6 top-links product-search">
+                <div class="top-links-container ng-scope">
+                    <input type="text" class="form-control" ng-model="FilterProducts" placeholder="{{'S_exp_search_placeholder' | translate}}"/>
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </div>     
+            </div>
+            <div class="col-md-2 col-xs-2 top-btn cart-btn">
+                <span>Add Contact</span><button class="save ng-binding" type="submit" ng-click="new_exp()"><i class="fa fa-users"></i></button>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 form-content" ng-scrollbars>
+          <div class="product-con">
+          <form ng-submit="CreateExpenses(NewExpenses)" id="" class="products contact" ng-show="new_expense" name="" novalidate >
+            <div class="col-md-6">
+                <h3>&nbsp;</h3>
+            </div>
+            <div class="col-md-6 top-btn inner-btns product-save">
+                <button class="save">{{'S_button_create' | translate}}</button>
+                <button class="cancel" ng-click="new_exp_Hide()">{{'S_button_cancel' | translate}}</button>
+            </div>
+            <div class="col-md-12">
+                <div class="col-sm-6">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Contact Type</label>
+                                <div class="form-group">
+                                    <div class="row type">
+                                        <div class="col-sm-4">
+                                            <div class="form-group medi radio-con">
+                                                <div class="radio">
+                                                    <label>
+                                                      <input type="radio" ng-model="contact_type" name="test" value="Standered"><span></span> Standered
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group medi radio-con">
+                                                <div class="radio">
+                                                    <label>
+                                                      <input type="radio" ng-model="contact_type" name="test" value="Doctor"><span></span> Doctor
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <div class="form-group medi radio-con">
+                                                <div class="radio">
+                                                    <label>
+                                                      <input type="radio" ng-model="contact_type" name="test" value="3rd party Payer"><span></span> 3rd party Payer
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                        	<h2>Personal Information</h2>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>Title</label>
+                                <select class="form-control" ng-modal="">
+                                    <option ng-repeat="" value="">1</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Occupation</label>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Preferred Name</label>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Company Name</label>
+                                <input type="text" class="form-control" ng-model=""/>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <h2>Contact Information</h2>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="text" class="form-control" ng-model=""/>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" class="form-control" ng-model=""/>
+                            </div>
+                        </div>
+                </div>
+                <div class="col-sm-6">
+                        <div class="col-sm-12 angular-animate" ng-if="contact_type == 'Doctor'">
+                            <div class="form-group">
+                                <label>Provider Number</label>
+                                <input type="text" class="form-control" ng-model=""/>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <h2>Address</h2>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group mess">
+                            	<textarea ng-model="note" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Country</label>
+                                <select ng-model="businessInfo.country"  class="form-control" ng-change="GetStates(businessInfo.country)"  ng-model="cntry">
+                                   <option ng-selected="" ng-repeat="countries in country" value="{{countries.code}}">{{countries.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>State</label>
+                                <select ng-model="businessInfo.state"  class="form-control">
+                                   <option ng-selected="" ng-repeat="states in state" value="{{states.code}}">{{states.name}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>City</label>
+                                <input type="text" class="form-control" ng-model=""/>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>Postal Code</label>
+                                <input type="email" class="form-control" ng-model=""/>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <h2>Others</h2>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group notes-box">
+                                <label>{{'S_product_label_note' | translate}}</label>
+                                <textarea ng-model="note" class="form-control"></textarea>
+                            </div>
+                        </div>
+                </div>
+             </div>
+        </form>
+        <div class="clearfix"></div>
+                 <accordion close-others="true">
+                    <accordion-group  ng-repeat="Contacts in ContactList" is-open="Contacts.isopen" class="my-group contact-list">
+                    <accordion-heading>
+
+                        <div class="productsdetails" style="outline:none"  ng-click="opened($index, Contacts.id)">
+                           <div class="col-sm-3">Name : {{Contacts.first_name}} {{Contacts.last_name}}</div>
+                           <div class="col-sm-3">Phone : {{Contacts.phone_list.contact_no}} ({{Contacts.phone_list.type}})</div>
+                           <div class="col-sm-2">Occupation : {{Contacts.occupation}}</div>
+                           <div class="col-sm-3">Company : {{Contacts.company}}</div>
+                           
+                           <div class="col-sm-1 text-right">
+                            <button class="" ng-click="DeleteContact(Contacts.id, $event)"><i class="fa fa-trash"></i></button>
+                           </div>
+                       </div>
+                    </accordion-heading>
+                      <div ng-if="showExpenseDetails($index)" class="no-animate">
+                            <div class="ExpenseDetails" ng-show="ExpenseDetails">
+                            	<div class="col-sm-6 edit-product">
+                                	<h3>Contact Information</h3>
+                                </div>
+                            	<div class="col-sm-6 pull-right edit-product">
+                                    <button class="ng-binding" ng-click="EditExpense()"><i class="fa fa-edit"></i>{{'S_button_edit' | translate}}</button>
+                                </div>
+                                <div class="col-sm-12 productInfo sms-detail">
+                                	<div class="col-sm-4">
+                                        <h4>
+                                            <label>Type </label>
+                                            <span>Standered</span>
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h4>
+                                            <label>Personal Information </label>
+                                            <span>Standered</span>
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h4>
+                                            <label>Preferred Name </label>
+                                            <span>test</span>
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h4>
+                                            <label>Country </label>
+                                            <span>India</span>
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h4>
+                                            <label>State </label>
+                                            <span>Punjab</span>
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h4>
+                                            <label>Occupation </label>
+                                            <span>Test</span>
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h4>
+                                            <label>Company name </label>
+                                            <span>test</span>
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h4>
+                                            <label>City </label>
+                                            <span>Mohali</span>
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h4>
+                                            <label>Post Code </label>
+                                            <span>146654</span>
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h4>
+                                            <label>Phone No </label>
+                                            <span>9855857725</span>
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h4>
+                                            <label>Provider No </label>
+                                            <span>9855857725</span>
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h4>
+                                            <label>Email </label>
+                                            <span>info@iamrupinder.com</span>
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h4>
+                                            <label>Address </label>
+                                            <span>test</span>
+                                        </h4>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h4>
+                                            <label>Notes</label>
+                                            <span>test</span>
+                                        </h4>
+                                    </div>
+                                </div>
+                             </div>
+                                
+                                <div class=" angular-animate " ng-show="edit_bar" >
+                                	<div class="clearfix"></div>
+                                <!--<form ng-submit="" id="productForm" name="productForm" class="products remove-top" novalidate >
+                                    <div class="col-md-6">
+                                    <h3>Edit Expense</h3>
+                                </div>
+                                <div class="col-md-6 top-btn inner-btns product-save">
+                                    <button class="save">{{'S_button_save' | translate}}</button>
+                                    <button class="cancel" ng-click="new_exp_Hide()">{{'S_button_cancel' | translate}}</button>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-sm-5">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Expense date</label>
+                                                    <input type="text" class="form-control" ng-model="product.serial_no" />
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Business</label>
+                                                    <select class="form-control" ng-model="product.tax">
+                                                        <option value="">N/A</option>
+                                                        <option ng-repeat="tax in taxList" value="{{tax.id}}">{{tax.name}} ({{tax.amount}}%)</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Vendor</label>
+                                                    <input type="text" class="form-control" ng-model="product.price" required/>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Category</label>
+                                                    <input type="text" class="form-control" ng-model="product.price" required/>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Tax</label>
+                                                    <input type="text" class="form-control" ng-model="product.cost_price"/>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label>Tax amount
+                                                        <i class="ic info info-hover">
+                                                            <span class="ng-binding">You may need to adjust this manually if only part of the expense was taxable.</span>
+                                                        </i>
+                                                    </label>
+                                                    <input type="text" class="form-control" ng-model="product.stock_number" />
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <div class="col-sm-12">
+                                            <div class="form-group">
+                                                <label>Total expense amount (including tax)</label>
+                                                <select class="form-control" ng-model="product.tax">
+                                                    <option value="">N/A</option>
+                                                    <option ng-repeat="tax in taxList" value="{{tax.id}}">{{tax.name}} ({{tax.amount}}%)</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-12">
+                                            <div class="form-group notes-box">
+                                                <label>{{'S_product_label_note' | translate}}</label>
+                                                <textarea ng-model="product.note" class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                 </div>
+                                    <div class="clearfix"></div>
+                                </form>-->
+                            </div>
+                            </div>
+                              
+                              
+                            
+                      </div>
+                    </accordion-group>
+                  </accordion>
+          </div>
+        </div>
+</div>
+<style>.form-control{width:100% !important;}</style>

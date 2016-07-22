@@ -1,0 +1,195 @@
+
+<form ng-submit="UpdateContact(Contact, Contact.id)" id="" class="products contact"  name="" novalidate >
+<div class="col-md-6">
+    <h3>&nbsp;</h3>
+</div>
+<div class="col-md-6 top-btn inner-btns product-save">
+    <button class="save">{{'S_button_update' | translate}}</button>
+    <button type="button" class="cancel" ng-click="contact_Hide()">{{'S_button_cancel' | translate}}</button>
+</div>
+<div class="col-md-12">
+    <div class="col-sm-6">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Contact Type</label>
+                    <div class="form-group">
+                        <div class="row type">
+                            <div class="col-sm-4">
+                                <div class="form-group medi radio-con">
+                                    <div class="radio">
+                                        <label>
+                                          <input type="radio" ng-model="Contact.contact_type" name="test" value="Standard"><span></span> Standard
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group medi radio-con">
+                                    <div class="radio">
+                                        <label>
+                                          <input type="radio" ng-model="Contact.contact_type" name="test" value="Doctor"><span></span> Doctor
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group medi radio-con">
+                                    <div class="radio">
+                                        <label>
+                                          <input type="radio" ng-model="Contact.contact_type" name="test" value="3rd party Payer"><span></span> 3rd party Payer
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <h2>Personal Information</h2>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Title</label>
+                    <select class="form-control" ng-model="Contact.title">
+                        <option value="dr">{{'S_UP_title1' | translate}}</option>
+                        <option value="mr">{{'S_UP_title2' | translate}}</option>
+                        <option value="mrs">{{'S_UP_title3' | translate}}</option>
+                        <option value="Miss">{{'S_UP_title4' | translate}}</option>
+                        <option value="Dr">{{'S_UP_title5' | translate}}</option>
+                        <option value="Master">{{'S_UP_title6' | translate}}</option>
+                        <option value="Professor">{{'S_UP_title7' | translate}}</option>
+                        <option value="Sir">{{'S_UP_title8' | translate}}</option>
+                        <option value="Lord">{{'S_UP_title9' | translate}}</option>
+                        <option value="Lady">{{'S_UP_title10' | translate}}</option>
+                        <option value="Dame">{{'S_UP_title11' | translate}}</option>
+                        <option value="Reverend">{{'S_UP_title12' | translate}}</option>
+                        <option value="Sister">{{'S_UP_title13' | translate}}</option>
+                        <option value="Rabbi">{{'S_UP_title14' | translate}}</option>
+                        <option value="King">{{'S_UP_title15' | translate}}</option>
+                        <option value="Zombie Lord">{{'S_UP_title16' | translate}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" class="form-control"  ng-model="Contact.first_name">
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" class="form-control" ng-model="Contact.last_name">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Occupation</label>
+                    <input type="text" class="form-control" ng-model="Contact.occupation">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Preferred Name</label>
+                    <input type="text" class="form-control"  ng-model="Contact.preffered_name">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Company Name</label>
+                    <input type="text" class="form-control" ng-model="Contact.company_name"/>
+                </div>
+            </div>
+            <div class="col-sm-12 angular-animate" ng-if="Contact.contact_type == 'Doctor'">
+                <div class="form-group">
+                    <label>Provider Number</label>
+                    <input type="text" class="form-control" ng-model="Contact.provider_number"/>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <h2>Contact Information</h2>
+            </div>
+            <div class="col-sm-12">
+                <div class="row">
+                <label class="col-sm-12">Phone Number</label>
+                <div class="form-group more-contacts" ng-repeat="phoneNum in Contact.phone_list">
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" ng-model="phoneNum.contact_no"/>
+                    </div>
+                    <div class="col-sm-4">
+                        <select class="form-control" ng-model="phoneNum.type">
+                            <option value="Mobile">Mobile</option>
+                            <option value="Home">Home</option>
+                            <option value="Work">Work</option>
+                            <option value="Fax">Fax</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3 con-rem">
+                        <a href="" ng-click="removePhone($index)" class="remove"><i class="ic cross"></i> Remove</a>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <a href="" ng-click="addPhone()" class="add-btn"><i class="ic add"></i> Add New</a>
+                </div>
+            </div>  
+            </div>  
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" ng-model="Contact.email"/>
+                </div>
+            </div>
+    </div>
+    <div class="col-sm-6">
+            
+            <div class="col-sm-12">
+                <h2>Address</h2>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group mess">
+                    <textarea  ng-model="Contact.address" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Country</label>
+                    <select  ng-model="Contact.country"  class="form-control" ng-change="GetStates(Contact.country)"  ng-model="cntry">
+                       <option ng-selected="" ng-repeat="countries in country" value="{{countries.code}}">{{countries.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>State</label>
+                    <select ng-model="Contact.state"  class="form-control">
+                       <option ng-selected="" ng-repeat="states in state" value="{{states.code}}">{{states.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="text" class="form-control" ng-model="Contact.city"/>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Postal Code</label>
+                    <input type="text" class="form-control" ng-model="Contact.post_code"/>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <h2>Others</h2>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group notes-box">
+                    <label>{{'S_product_label_note' | translate}}</label>
+                    <textarea ng-model="Contact.notes" class="form-control"></textarea>
+                </div>
+            </div>
+    </div>
+ </div>
+</form>
+        

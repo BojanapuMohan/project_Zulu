@@ -1,0 +1,72 @@
+<div class="dashboard-con settings">
+	<form ng-submit="settingSubmit(account)">
+    	<div class="top-container">
+            <div class="col-md-7 col-xs-5 top-links">
+                <div class="top-links-container" ng-include="'templates/settings/common/top-links.html'"></div>     
+            </div>
+            <div class="col-md-5 col-xs-7 top-btn import-btn">
+                <button class="save" type="submit">{{'S_import_button1' | translate}}</button>
+                <button class="save" type="submit">{{'S_import_button2' | translate}}</button>
+                <button class="save" type="submit">{{'S_import_button3' | translate}}</button>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 form-content" ng-scrollbars rebuild-on-resize>
+        	<div class="col-md-12">
+            	<h2 class="autowid">{{'S_import_heading' | translate}}
+                    <i class="ic info info-hover bottom left-side">
+                        <span>{{'S_import_heading_info' | translate}}</span>
+                    </i>
+                </h2>
+                <div class="form-group data-import">
+                      <label>{{'S_import_label_list' | translate}}</label>
+                      <p>{{'S_import_label_list_p' | translate}}</p>
+                </div>
+                <div class="table-responsive import-data">
+                	<table class="table">
+                    	<thead>
+                        	<tr>
+                            	<th>{{'S_import_table_heading1' | translate}}</th>
+                            	<th>{{'S_import_table_heading2' | translate}}</th>
+                            	<th>{{'S_import_table_heading3' | translate}}</th>
+                                <th>{{'S_import_table_heading4' | translate}}</th>
+                            	<th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        	<tr>
+                            	<td>3rd Sept 2015</td>
+                            	<td>heart-patients.csv</td>
+                            	<td>Patients (1)</td>
+                                <td>Imported</td>
+                            	<td class="import-btn-con">
+                                	<a href="">{{'S_button_download' | translate}}</a>
+                                	<a href="" class="delete">{{'S_button_delete' | translate}}</a>
+                                </td>
+                            </tr>
+                            <tr>
+                            	<td>3rd Sept 2015</td>
+                            	<td>heart-patients.csv</td>
+                            	<td>Patients (1)</td>
+                                <td>Imported</td>
+                            	<td class="import-btn-con">
+                                	<a href="">{{'S_button_download' | translate}}</a>
+                                	<a href="" class="delete">{{'S_button_delete' | translate}}</a>
+                                </td>
+                            </tr>
+                            <tr>
+                            	<td>3rd Sept 2015</td>
+                            	<td>heart-patients.csv</td>
+                            	<td>Patients (1)</td>
+                                <td>Imported</td>
+                            	<td class="import-btn-con">
+                                	<a href="">{{'S_button_download' | translate}}</a>
+                                	<a href="" class="delete">{{'S_button_delete' | translate}}</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

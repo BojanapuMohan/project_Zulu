@@ -1,0 +1,78 @@
+<div class="dashboard-con settings">
+	<form ng-submit="settingSubmit(account)">
+    	<div class="top-container">
+            <div class="col-md-9 col-xs-6 top-links">
+                <div class="top-links-container" ng-include="'templates/settings/common/top-links.html'"></div>     
+            </div>
+            <div class="col-md-3 col-xs-6 top-btn">
+                <button class="save" type="submit">{{'S_button_save' | translate}}</button>
+                <button class="cancel" type="submit">{{'S_button_cancel' | translate}}</button>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 form-content" ng-scrollbars rebuild-on-resize>
+        	<div class="col-md-6">
+            	<h2 class="section-title">{{'S_invoice_heading_general' | translate}}</h2>
+                  <div class="form-group invoice-title">
+                  	<div class="col-xs-7">
+                        <label>{{'S_invoice_label_title' | translate}}</label>
+                        <input type="text" class="form-control" placeholder="Tax Invoice Test">
+                    </div>
+                    <div class="col-xs-4">
+                        <label>{{'S_invoice_label_starting' | translate}}</label>
+                        <input type="text" class="form-control invoice-num" placeholder="">
+                    </div>
+                  </div>
+                  <div class="form-group extra-bus">
+                    <label>{{'S_invoice_label_extra' | translate}}
+                    	<i class="ic info info-hover">
+                            <span>{{'S_invoice_label_extra_info' | translate}}</span>
+                        </i>
+                    </label>
+                    <textarea class="form-control"></textarea>
+                  </div>
+                  <div class="form-group check-con cate pushit-left">
+                    <div class="checkbox">
+                        <label>
+                          <input type="checkbox"><span></span> {{'S_invoice_option1' | translate}}
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                          <input type="checkbox"><span></span> {{'S_invoice_option2' | translate}}
+                        </label>
+                        <i class="ic info info-hover">
+                            <span>{{'S_invoice_option2_info' | translate}}</span>
+                        </i>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                          <input type="checkbox"><span></span> {{'S_invoice_option3' | translate}}
+                        </label>
+                        <i class="ic info info-hover">
+                            <span>{{'S_invoice_option3_info' | translate}}</span>
+                        </i>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-md-6 col2">
+            	<h2 class="blank">&nbsp;</h2>
+                <div class="form-group fulwid">
+                    <label>{{'S_invoice_label_offer' | translate}}
+                    	<i class="ic info info-hover bottom">
+                            <span>{{'S_invoice_label_offer_info' | translate}}</span>
+                        </i>
+                    </label>
+                    <textarea class="form-control"></textarea>
+                </div>
+                <div class="form-group fulwid">
+                    <label>{{'S_invoice_label_default' | translate}}
+                    	<i class="ic info info-hover">
+                            <span>{{'S_invoice_label_default_info' | translate}}</span>
+                        </i>
+                    </label>
+                    <textarea class="form-control"></textarea>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,166 @@
+<div class="dashboard-con settings">
+     <div class="top-container">
+        <div class="col-md-4 col-xs-4 top-links">
+            <div class="top-links-container ng-scope">
+                <ul class="open-nav ng-scope">
+                    <li><a href="" class="ng-binding">Contact</a></li>
+                </ul>
+            </div>     
+        </div>
+        <div class="col-md-6 col-xs-6 top-links product-search">
+            <div class="top-links-container ng-scope">
+                <input type="text" class="form-control" ng-model="FilterContact" placeholder="{{'S_exp_search_placeholder' | translate}}"/>
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </div>     
+        </div>
+        <div class="col-md-2 col-xs-2 top-btn cart-btn">
+            <span>Add Contact</span><button class="save ng-binding" type="submit" ng-click="new_contact()"><i class="fa fa-users"></i></button>
+        </div>
+    </div>
+        <div class="col-md-12 col-sm-12 form-content" ng-scrollbars>
+         <div class="product-con">
+         <div ng-include="'templates/contact/contact-form.html'" ng-show="new_con"></div>
+         <div class="clearfix"></div>
+         <accordion close-others="true">
+            <accordion-group  ng-repeat="Contacts in ContactList | filter:FilterContact" is-open="Contacts.isopen" class="my-group contact-list">
+            <accordion-heading>
+
+                <div class="productsdetails" style="outline:none"  ng-click="opened($index, Contacts.id)">
+                   <div class="col-sm-3">Name : {{Contacts.first_name}} {{Contacts.last_name}}</div>
+                   <div class="col-sm-3" ng-if="Contacts.phone_list.contact_no != ''">Phone : {{Contacts.phone_list.contact_no}} ({{Contacts.phone_list.type}})</div>
+
+                   <div class="col-sm-3" ng-if="Contacts.phone_list.contact_no == ''">Phone : {{Contacts.phone_list.contact_no}} </div>
+
+                   <div class="col-sm-2">Occupation : {{Contacts.occupation}}</div>
+                   <div class="col-sm-3">Company : {{Contacts.company_name}}</div>
+                   
+                   <div class="col-sm-1 text-right">
+                    <button class="" ng-click="DeleteContact(Contacts.id, $event)"><i class="fa fa-trash"></i></button>
+                   </div>
+               </div>
+            </accordion-heading>
+              <div ng-if="showExpenseDetails($index)" class="no-animate">
+                    <div class="ExpenseDetails" ng-show="contactDetails">
+                        <div class="col-sm-6 edit-product">
+                            <h3>Contact Information</h3>
+                        </div>
+                        <div class="col-sm-6 pull-right edit-product">
+                            <button class="ng-binding" ng-click="EditContact()"><i class="fa fa-edit"></i>{{'S_button_edit' | translate}}</button>
+                        </div>
+                        <div class="col-sm-12 productInfo sms-detail">
+                            <div class="col-sm-4">
+                                <h4>
+                                    <label>Type </label>
+                                    <span>{{ContactDetails.contact_type}}</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-12">
+                            	<h5>Pesonal Information</h4>
+                            </div>
+                            <div class="col-sm-8">
+                                <h4>
+                                    <label>Name</label>
+                                    <span>{{ContactDetails.title.substring(0,1).toUpperCase()+ContactDetails.title.substring(1) }} {{ContactDetails.first_name}} {{ContactDetails.last_name}}</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-4">
+                                <h4>
+                                    <label>Occupation </label>
+                                    <span>{{ContactDetails.occupation}}</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-4">
+                                <h4>
+                                    <label>Preferred Name </label>
+                                    <span>{{ContactDetails.preffered_name}}</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-4">
+                                <h4>
+                                    <label>Company name </label>
+                                    <span>{{ContactDetails.company_name}}</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-4" ng-if="ContactDetails.contact_type == 'Doctor'">
+                                <h4>
+                                    <label>Provider No</label>
+                                    <span>{{ContactDetails.provider_number}}</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-12">
+                                <h5>Contact Information</h5>
+                            </div>
+                            <div class="col-sm-12">
+                                <h4>
+                                    <label>Email</label>
+                                    <span>{{ContactDetails.email}}</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-12">
+                                <h4 class="numbers-con">
+                                    <label>Phone No </label>
+                                    <div class="numbers">
+                                        <span ng-repeat="phones in ContactDetails.phone_list" ng-if="Contacts.phone_list.contact_no != ''">{{phones.contact_no}}<strong>({{phones.type}}) 
+                                            <br/></strong></span>
+
+                                            <span ng-repeat="phones in ContactDetails.phone_list" ng-if="Contacts.phone_list.contact_no == ''">{{phones.contact_no}}
+                                          </span>
+                                    </div>
+                                </h4>
+                            </div>
+                            <div class="col-sm-12">
+                                <h5>Personal Address</h5>
+                            </div>
+                            <div class="col-sm-8">
+                                <h4>
+                                    <label>Address</label>
+                                    <span>{{ContactDetails.address}}</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-4">
+                                <h4>
+                                    <label>Country</label>
+                                    <span ng-repeat="countries in country | filter:{code:ContactDetails.country}">{{countries.name}}</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-4">
+                                <h4>
+                                    <label>State</label>
+                                    <span ng-repeat="states in state | filter:{code:ContactDetails.state}">{{states.name}}</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-4">
+                                <h4>
+                                    <label>City</label>
+                                    <span>{{ContactDetails.city}}</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-4">
+                                <h4>
+                                    <label>Post Code</label>
+                                    <span>{{ContactDetails.post_code}}</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-12">
+                                <h5>Other</h5>
+                            </div>
+                            <div class="col-sm-12">
+                                <h4>
+                                    <label>Notes</label>
+                                    <span>{{ContactDetails.notes}}</span>
+                                </h4>
+                            </div>
+                        </div>
+                     </div>
+                     <div class=" angular-animate " ng-show="edit_contact" >
+                          <div class="clearfix"></div>
+                          <div ng-include="'templates/contact/contact-edit-form.html'"></div>
+                     </div>
+                    </div>
+              </div>
+            </accordion-group>
+          </accordion>
+          </div>
+        </div>
+</div>
+<style>.form-control{width:100% !important;}</style>

@@ -1,0 +1,53 @@
+<div class="dashboard-con settings">
+    <div class="top-container">
+        <div class="{{settingtopClasses1}}">
+            <div class="top-links-container" ng-include="'templates/settings/common/top-links.html'"></div>     
+        </div>
+        <div class="{{settingtopClasses2}}">
+            <button class="save" type="submit" form="UserForm">{{userBtnText | translate}}</button>
+            <button class="cancel">{{'S_button_cancel' | translate}}</button>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 bus-con">
+        <div class="col-md-2 side-bar-con">
+            <div class="side-bar">
+                <div class="side-bar-header">
+                    <h5>{{'S_UP_main_heading' | translate}}
+</h5>
+                    <a class="" ui-sref="settings.users.new">
+                    	<i class="ic bus-icn user-p"></i>
+                    	<span>{{'S_tool-tip-addnew' | translate}}</span>
+                    </a>
+                </div>
+                <div class="side-bar-search">
+                    <form>
+                        <input type="text" class="form-control" placeholder="{{'S_placeholder-Search' | translate}}" ng-model="uListFilter" />
+                        <button type="submit" disabled="disabled"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="side-bar-links side-info billing-items user-items">
+                	<ul>
+                    	<li ng-repeat="users in userList | filter:uListFilter" ><a href="" ui-sref="settings.users.info({user_id:users.id})" ui-sref-active="active">{{users.first_name}} {{users.last_name}}
+                        </a>
+                        <md-tooltip class="customtooltip angular-animate select-users" md-direction="right">
+                                <ul>
+                                        <li><h6>{{'S_UP_main_tip1' | translate}}</h6><p><i ng-class="{'disable-ic' : !users.is_doctor, 'enable-ic' :  users.is_doctor }" class="ic "></i></p></li>
+                                        <li><h6>{{'S_UP_main_tip2' | translate}}</h6><p>{{users.role}}</p></li> 
+                                        </ul>
+                              </md-tooltip></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" col-md-10 col-sm-10 form-content info-container" ng-scrollbars rebuild-on-resize rebuild-on="rebuild:me" > 
+        <div ui-view></div>
+    	<div class="col-md-12" ng-show="showBlank">
+        	<div class="select-user">
+            	<img src="assets/user-select.png" alt="" />
+                <h6>{{'S_UP_select_user' | translate}}</h6>
+            </div>
+              
+        </div>
+    </div>
+</div>

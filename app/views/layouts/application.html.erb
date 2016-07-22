@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="clinikoApp" >
+	<head>
+	  <title ng-bind="$state.current.data.pageTitle | translate"></title>
+	  <%= stylesheet_link_tag    'application', media: 'all' %>
+	  <%= javascript_include_tag 'application' %>
+	  <base href="/">
+	  <%= csrf_meta_tags %>
+	  <link href="http://fonts.googleapis.com/css?family=Quicksand:400,700,300" rel="stylesheet" />
+	  <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
+	  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" />
+	  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,400italic,700,700italic,600italic" rel="stylesheet" />
+
+	</head>
+	<body ng-controller="MainCntl" ng-class="{'NotLoggedIn' : !isLoggedIn}">
+		<header class="top-header ng-hide no-animate" ng-include="'templates/common/header.html'"  ng-show="isLoggedIn"></header>
+		<header class="navbar-twitch ng-hide no-animate" ng-include="'templates/common/alide.html'" ng-show="isLoggedIn"></header>
+		<div class=" container-fluid main-content" ng-class="{'Login' : !isLoggedIn}">
+			<div class="row">
+					<div ui-view="" id="ng-view" class="slide-animation no-animate">
+						 <%= yield %>
+					</div>
+			</div>
+		</div>
+	</body>
+</html>

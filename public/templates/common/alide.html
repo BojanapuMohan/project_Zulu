@@ -1,0 +1,97 @@
+<div class="navbar navbar-inverse navbar-twitch" role="navigation"  side-nav>
+	<div class="container">
+			<ul class="nav navbar-nav">
+				<li ui-sref-active="active" ng-class="{active: $state.includes('dashboard')}">
+					<a ui-sref="dashboard">
+						<span class="small-nav" data-toggle="tooltip" data-placement="right"> 
+							<span class="ic dashboard" ng-class="{active: $state.includes('dashboard')}"></span> 
+						</span>
+						<span class="full-nav"> {{'S_sidebar_menu1' | translate}} </span>
+					</a>
+				</li>
+				<li ui-sref-active="active">
+					<a href="#about-us">
+						<span class="small-nav" data-toggle="tooltip" data-placement="right"> 
+							<span class="ic icn2"></span> 
+						</span>
+						<span class="full-nav"> {{'S_sidebar_menu2' | translate}} </span>
+					</a>
+				</li>
+				<li ui-sref-active="active">
+					<a ui-sref="patient">
+						<span class="small-nav" data-toggle="tooltip" data-placement="right"> 
+							<span class="ic icn3"></span> 
+						</span>
+						<span class="full-nav"> {{'S_sidebar_menu3' | translate}} </span>
+					</a>
+				</li>
+                <li ui-sref-active="active">
+					<a href="#">
+						<span class="small-nav" data-toggle="tooltip" data-placement="right"> 
+							<span class="ic icn4"></span> 
+						</span>
+						<span class="full-nav"> {{'S_sidebar_menu4' | translate}} </span>
+					</a>
+				</li>
+                <li ui-sref-active="active">
+					<a href="#">
+						<span class="small-nav" data-toggle="tooltip" data-placement="right"> 
+							<span class="ic icn5"></span> 
+						</span>
+						<span class="full-nav"> {{'S_sidebar_menu5' | translate}} </span>
+					</a>
+				</li>
+                <li ui-sref-active="active" {active: $state.includes('products')}>
+					<a ui-sref="products.list">
+						<span class="small-nav" data-toggle="tooltip" data-placement="right"> 
+							<span class="ic icn6"></span> 
+						</span>
+						<span class="full-nav"> {{'S_sidebar_menu6' | translate}} </span>
+					</a>
+				</li>
+                <li ui-sref-active="active">
+					<a ui-sref="expense">
+						<span class="small-nav" data-toggle="tooltip" data-placement="right"> 
+							<span class="ic icn7"></span> 
+						</span>
+						<span class="full-nav"> {{'S_sidebar_menu7' | translate}} </span>
+					</a>
+				</li>
+                <li ui-sref-active="active">
+					<a ui-sref="contact">
+						<span class="small-nav" data-toggle="tooltip" data-placement="right"> 
+							<span class="ic icn8"></span> 
+						</span>
+						<span class="full-nav"> {{'S_sidebar_menu8' | translate}} </span>
+					</a>
+				</li>
+                <li  ui-sref-active="active">
+					<a ui-sref="communication">
+						<span class="small-nav" data-toggle="tooltip" data-placement="right"> 
+							<span class="ic icn9"></span> 
+						</span>
+						<span class="full-nav"> {{'S_sidebar_menu9' | translate}} </span>
+					</a>
+				</li>
+                <li ui-sref-active="active">
+					<a href="#">
+						<span class="small-nav" data-toggle="tooltip" data-placement="right"> 
+							<span class="ic icn10"></span> 
+						</span>
+						<span class="full-nav"> {{'S_sidebar_menu10' | translate}} </span>
+					</a>
+				</li>
+                <li ng-class="{active: $state.includes('settings')}">
+
+					<a ui-sref="settings.account({comp_id:comp_id})" >
+
+						<span class="small-nav" data-toggle="tooltip" data-placement="right" > 
+							<span class="ic icn11" ng-class="{active: $state.includes('settings')}"></span> 
+						</span>
+						<span class="full-nav"> {{'S_sidebar_menu11' | translate}} </span>
+					</a>
+				</li>
+			</ul>
+		</div><!--/.nav-collapse -->
+</div>
+

@@ -1,0 +1,92 @@
+<form ng-submit="CreateBusiness(businessInfo)" name="newBusiness">
+<div class="dashboard-con settings">
+    <div class="top-container">
+        <div class="col-md-8 col-xs-6 top-links">
+            <div class="top-links-container" ng-include="'templates/settings/common/top-links.html'"></div>    
+        </div>
+        <div class="col-md-4 col-xs-6 top-btn">
+            <button class="save" type="submit">Update</button>
+            <button class="cancel">Cancel</button>
+            <button class="cancel">Delete</button>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 bus-con">
+        <div class="col-md-2 side-bar-con">
+            <div class="side-bar">
+                <div class="side-bar-header">
+                    <h5>Businesses Records</h5>
+                    <a ui-sref="settings/busines/new" class="ic bus-icn"></a>
+                </div>
+                <div class="side-bar-search">
+                    <form>
+                        <input type="text" class="form-control" placeholder="Search" />
+                        <button type="submit" disabled="disabled"><i class="fa fa-search" ></i></button>
+                    </form>
+                </div>
+                <div class="side-bar-links" ng-scrollbars rebuild-on-resize>
+                	<ul>
+                      <li ng-repeat="business in businessList" ui-sref="settings/busines({business_id:business.id})"><a href="">{{business.name}}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" col-md-10 col-sm-10 form-content info-container " ng-scrollbars rebuild-on-resize>
+    	<div class="col-md-6">
+        	<h2>Business information</h2>
+              <div class="form-group">
+                <label>Name of the Business</label>
+                <input ng-model="businessInfo.name" type="text" class="form-control" placeholder="Johnson & Johnson Ltd.">
+              </div>
+              <div class="form-group">
+                <label>Address</label>
+                <input ng-model="businessInfo.address" type="text" class="form-control" placeholder="Sambhaji Nagar, Mulund West">
+              </div>
+              <div class="form-group col-xs-4 city-con">
+                <label>City</label>
+                <input ng-model="businessInfo.city"  type="text" class="form-control" placeholder="City">
+              </div>
+              <div class="form-group col-xs-4 city-con">
+                <label>State</label>
+                <select ng-model="businessInfo.state"  class="form-control">
+                   <option ng-selected="" ng-repeat="states in state" value="{{states.code}}">{{states.name}}</option>
+                </select>
+              </div>
+              <div class="form-group col-xs-4 city-con">
+                <label>Postal Code</label>
+                <input ng-model="businessInfo.pin_code"  type="text"  class="form-control" placeholder="400082"/>
+              </div>
+              <div class="form-group">
+                <label>Country</label>
+                <select ng-model="businessInfo.country"  class="form-control" ng-change="GetStates(cntry)"  ng-model="cntry">
+                   <option ng-selected="" ng-repeat="countries in country" value="{{countries.code}}">{{countries.name}}</option>
+                </select>
+              </div>
+        </div>
+    	<div class="col-md-6">
+        	<h2 class="blank">&nbsp;</h2>
+        	  <div class="form-group name-num">
+                <label>Business Registration Name & Number</label>
+                <input ng-model="businessInfo.reg_name"  type="text" class="form-control" placeholder="e.g. KLB">
+                <input ng-model="businessInfo.reg_number"  type="text" class="form-control" placeholder="e.g. 67833-557890-12">
+              </div>
+              <div class="form-group url">
+                <label>Website URL</label>
+                <input ng-model="businessInfo.web_url"  type="text" class="form-control" placeholder="http://www.jnjindia.com/">
+              </div>
+              <div class="form-group contact-info">
+                <label>Contact Information</label>
+                <textarea ng-modal="businessInfo.contact_info"  class="form-control"></textarea>
+              </div>
+              <div class="form-group check-con online">
+                <label>Online Bookings</label>
+                <div class="checkbox">
+                    <label>
+                      <input ng-model="businessInfo.online_booking"  type="checkbox"><span></span> Show this business in online bookings
+                    </label>
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+</form>

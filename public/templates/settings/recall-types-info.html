@@ -1,0 +1,22 @@
+<form id="RecallForm" ng-submit="RecallForm.$valid && RecallSubmit(recalData);" novalidate name="RecallForm">
+<div class="col-md-6">
+        	<h2>{{'S_Recall_heading_Return_visit' | translate}}</h2>
+              <div class="form-group">
+                <label>{{'S_label_name' | translate}}</label>
+                <input type="text" class="form-control" placeholder="{{'S_placeholder-Return_visit' | translate}}" ng-model="recalData.name" required>
+              </div>
+              <div class="form-group col-md-12 time-con range recell">
+                <label>{{'S_Billable_label_Recall_in' | translate}}</label>
+                <select class="form-control" ng-model="recalData.period_val" >
+                  <option ng-repeat="n in range(1,100)">{{n}}</option>
+                </select>
+                <select class="form-control" ng-model="recalData.period_name" >
+                  <option value="Day(s)">Day(s)</option>
+                  <option value="Week(s)">Week(s)</option>
+                  <option value="Month(s)">Month(s)</option>
+                </select>
+              </div>
+        </div>
+    	<div class="col-md-6">
+        </div>
+</form>

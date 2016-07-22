@@ -1,0 +1,72 @@
+<div class="dashboard-con settings">
+    <div class="top-container">
+        <div class="col-md-8 col-xs-6 top-links">
+            <div class="top-links-container" ng-include="'templates/settings/common/top-links.html'"></div>    
+        </div>
+        <div class="col-md-4 col-xs-6 top-btn">
+            <button class="save" type="submit" form="AppointmentForm">{{btnText | translate}}</button>
+            <button class="cancel">{{'S_button_cancel' | translate}}</button>
+            <button class="cancel" ng-click="appDelete('sm')" ng-hide="appDeleteBtn">{{'S_button_delete' | translate}}</button>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 bus-con">
+        <div class="col-md-2 side-bar-con">
+            <div class="side-bar">
+                <div class="side-bar-header">
+                    <h5>{{'S_appointment_main_heading' | translate}}</h5>
+                    <a class="" ui-sref="settings.appointment.info({appointmentID:'new'})">
+                    	<i class="ic bus-icn app-icn"></i>
+                    	<span>{{'S_tool-tip-addnew' | translate}}</span>
+                    </a>
+                </div>
+                <div class="side-bar-search">
+                    <form>
+                        <input type="text" class="form-control" placeholder="{{'S_placeholder-Search' | translate}}" />
+                        <button type="submit" disabled="disabled"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="side-bar-links app" ng-scrollbars rebuild-on-resize rebuild-on="rebuild:me">
+                	<ul>
+                    	<li ng-repeat="appointments in AppointmentList">
+                        <a ui-sref="settings.appointment.info({appointmentID:appointments.id})"  href="" ui-sref-active="active"><span style="background-color:{{appointments.color_code}}"></span>{{appointments.name}}</a>
+                      </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" col-md-10 col-sm-10 form-content info-container " ng-scrollbars rebuild-on-resize rebuild-on="rebuild:me">
+    	<div ui-view></div>
+    </div>
+</div>
+<script type="text/ng-template" id="selectColor.html">
+        <div class="modal-body confirm-body color-body">
+      <div class="confirm scolor">
+                <div class="selectColor">
+					<h5>{{'S_appointment_pick_color' | translate}}</h5>
+                    <ul>
+                        <li ng-repeat="item in items">
+                          <label for="{{item.color}}">
+                              <input type="radio" name="colors" value="{{item.color}}" id="{{item.color}}" ng-change="set_Color(item.color); selected.item = item" ng-model="appointment.clr"/>
+                              <div class="color-outer"><span style="background:{{item.color}}"></span></div>
+                               
+                          </label>
+                        </li>
+                    </ul>
+                </div>
+                <a href="" ng-click="selectColor($scope.cselected)">{{'S_button_ok' | translate}}</a>
+                <a href="" ng-click="cancel()">{{'S_button_cancel' | translate}}</a>
+            </div>
+        </div>
+</script>
+
+<!-- Modal -->
+<script type="text/ng-template" id="DeleteModal.html">
+        <div class="modal-body confirm-body">
+			<div class="confirm">
+                <p>{{'S_appointment_confirm_msg' | translate}}</p>
+                <a href="" ng-click="okdelete()">{{'S_button_confirm' | translate}}</a>
+                <a href="" ng-click="cancel()">{{'S_button_cancel' | translate}}</a>
+            </div>
+        </div>
+</script>

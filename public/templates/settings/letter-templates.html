@@ -1,0 +1,62 @@
+<div class="dashboard-con settings">
+    <div class="top-container">
+        <div class="col-md-9 col-xs-7 top-links">
+            <div class="top-links-container" ng-include="'templates/settings/common/top-links.html'"></div>    
+        </div>
+        <div class="col-md-3 col-xs-5 top-btn">
+            <button class="save" type="submit">{{'S_button_save' | translate}}</button>
+            <button class="cancel">{{'S_button_cancel' | translate}}</button>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 bus-con">
+        <div class="col-md-2 side-bar-con">
+            <div class="side-bar">
+                <div class="side-bar-header">
+                    <h5>{{'S_Letter_main_heading' | translate}}</h5>
+                    <a class="" >
+                    	<i class="ic bus-icn temp"></i>
+                    	<span>{{'S_tool-tip-addnew' | translate}}</span>
+                    </a>
+                </div>
+                <div class="side-bar-search">
+                    <form>
+                        <input type="text" class="form-control" placeholder="Search" />
+                        <button type="submit" disabled="disabled"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="side-bar-links" ng-scrollbars rebuild-on-resize>
+                	<ul>
+                    	<li><a href="">Letter Template 1</a></li>
+                    	<li><a href="">Ms. Hannah </a></li>
+                    	<li><a href="">Cavity Patient</a></li>
+                    	<li><a href="">Letter Template 2</a></li>
+                    	<li><a href="">Ms. Hannah </a></li>
+                    	<li><a href="">Cavity Patient</a></li>
+                    	<li><a href="">Letter Template 3</a></li>
+                    	<li><a href="">Ms. Hannah </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" col-md-10 col-sm-10 form-content info-container " ng-scrollbars rebuild-on-resize>
+    	<div class="col-md-6 letter-temp">
+        	<h2>{{'S_Letter_heading_letter_T' | translate}}</h2>
+              <div class="form-group">
+                <label>{{'S_Letter_label_Tname' | translate}}</label>
+                <input type="text" class="form-control" placeholder="">
+              </div>
+        </div>
+    	<div class="col-md-6 letter-temp">
+        	<h2 class="blank">&nbsp;</h2>
+              <div class="form-group">
+                <label>{{'S_Letter_label_Dsub' | translate}}</label>
+                <input type="text" class="form-control" placeholder="">
+              </div>
+        </div>
+        <div class="col-md-12">
+            <text-angular-toolbar ta-toolbar="[['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'pre', 'quote','bold', 'italics', 'underline', 'strikeThrough', 'ul', 'ol', 'redo', 'undo', 'clear','justifyLeft', 'justifyCenter', 'justifyRight', 'indent', 'outdent'],['patient', 'practitioner', 'business', 'contact', 'refDcotor', 'general']]" name="myToolbar"></text-angular-toolbar>
+            <text-angular ng-model="data.htmlcontent" ta-target-toolbars='myToolbar'></text-angular>
+        </div>
+    </div>
+</div>

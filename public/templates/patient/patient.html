@@ -1,0 +1,238 @@
+<div class="dashboard-con settings">
+     <div class="top-container">
+        <div class="col-md-4 col-xs-4 top-links">
+            <div class="top-links-container ng-scope">
+                <ul class="open-nav ng-scope">
+                    <li><a href="" class="ng-binding">Patient</a></li>
+                </ul>
+            </div>     
+        </div>
+        <div class="col-md-6 col-xs-6 top-links product-search">
+            <div class="top-links-container ng-scope">
+                <input type="text" class="form-control" ng-model="FilterProducts" placeholder="{{'S_exp_search_placeholder' | translate}}"/>
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </div>     
+        </div>
+        <div class="col-md-2 col-xs-2 top-btn cart-btn">
+            <span>Add Patient</span><button class="save ng-binding" type="submit" ng-click="new_patient()"><i class="fa fa-users"></i></button>
+        </div>
+    </div>
+        <div class="col-md-12 col-sm-12 form-content" ng-scrollbars>
+         <div class="product-con">
+         <div ng-include="'templates/patient/patient-form.html'" ng-show="new_pati"></div>
+         <div class="clearfix"></div>
+         <div class="PatientList" ng-repeat="P_Data in PatientListData">
+            <ul ui-sref="patient-detail({patient_id:P_Data.id})">
+                <li><h3>{{P_Data.title}} {{P_Data.first_name}} {{P_Data.last_name}}</h3></li>
+                <li><h4>Phone No: {{P_Data.mobile_no}}<span>(mobile)</span></h4></li>
+                <li><h4>DOB : {{P_Data.dob_day}} {{P_Data.dob_month}} {{P_Data.dob_year}}</h4></li>
+                <li><h4>Email : {{P_Data.email}}</h4></li>
+                <li class="text-right">
+                	<button class="pro-value pro-date"><i class="basket"></i> {{P_Data.next_apt}}</button>
+                	<button class="" ng-click="DeletePatient(P_Data.id, $event)"><i class="fa fa-trash"></i></button>    
+                </li>
+
+            </ul>
+         </div>
+        <!--  <accordion close-others="true">
+            <accordion-group  ng-repeat="Contacts in ContactList" is-open="Contacts.isopen" class="my-group contact-list">
+            <accordion-heading>
+
+                <div class="productsdetails" style="outline:none"  ng-click="opened($index, Contacts.id)">
+                   <div class="col-sm-3">Name : {{Contacts.first_name}} {{Contacts.last_name}}</div>
+                   <div class="col-sm-3">Phone : {{Contacts.phone_list.contact_no}} ({{Contacts.phone_list.type}})</div>
+                   
+                   <div class="col-sm-6 text-right">
+                    <button class="pro-value pro-date"><i class="basket"></i> On Wednesday, 28th Oct 2015 at 12.45 pm</button>
+                    <button class="" ng-click="DeleteContact(Contacts.id, $event)"><i class="fa fa-trash"></i></button>
+                   </div>
+               </div>
+            </accordion-heading>
+              <div ng-if="showExpenseDetails($index)" class="no-animate">
+                    <div class="ExpenseDetails" ng-show="contactDetails">
+                        <div class="col-sm-6 edit-product">
+                            <h3>Patient Information</h3>
+                        </div>
+                        <div class="col-sm-6 pull-right edit-product">
+                            <button class="ng-binding" ng-click="EditContact()"><i class="fa fa-edit"></i>{{'S_button_edit' | translate}}</button>
+                        </div>
+                        <div class="col-sm-12 productInfo sms-detail">
+                            <div class="col-sm-12">
+                            	<h5>Pesonal Information</h4>
+                            </div>
+                            <div class="col-sm-12">
+                                <h4>
+                                    <label>Name</label>
+                                    <span>{{ContactDetails.title}} {{ContactDetails.first_name}} {{ContactDetails.last_name}}</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-12">
+                                <h4>
+                                    <label>Date of birth </label>
+                                    <span>25-june-1992</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-12">
+                                <h4>
+                                    <label>Gender </label>
+                                    <span>Male</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-12">
+                                <h5>Contact Information</h5>
+                            </div>
+                            <div class="col-sm-12">
+                                <h4>
+                                    <label>Email</label>
+                                    <span>{{ContactDetails.email}}</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-12">
+                                <h4 class="numbers-con">
+                                    <label>Phone No </label>
+                                    <div class="numbers">
+                                        <span ng-repeat="phones in ContactDetails.phone_list">{{phones.contact_no}}<strong>({{phones.type}}) ,</strong></span>
+                                    </div>
+                                </h4>
+                            </div>
+                            <div class="col-sm-12">
+                                <h5>Personal Address</h5>
+                            </div>
+                            <div class="col-sm-8">
+                                <h4>
+                                    <label>Address</label>
+                                    <span>{{ContactDetails.address}}</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-4">
+                                <h4>
+                                    <label>Country</label>
+                                    <span ng-repeat="countries in country | filter:{code:ContactDetails.country}">{{countries.name}}</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-4">
+                                <h4>
+                                    <label>State</label>
+                                    <span ng-repeat="states in state | filter:{code:ContactDetails.state}">{{states.name}}</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-4">
+                                <h4>
+                                    <label>City</label>
+                                    <span>{{ContactDetails.city}}</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-4">
+                                <h4>
+                                    <label>Post Code</label>
+                                    <span>{{ContactDetails.post_code}}</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-12">
+                                <h5>related clients</h5>
+                            </div>
+                            <div class="col-sm-12">
+                                <h4 class="numbers-con">
+                                    <div class="numbers">
+                                        <span>Related Client<strong>(testing) ,</strong></span>
+                                    </div>
+                                </h4>
+                            </div>
+                            <div class="col-sm-12">
+                                <h5>Billing Infromation</h5>
+                            </div>
+                            <div class="col-sm-6">
+                                <h4 class="big-label">
+                                    <label>Concession Type</label>
+                                    <span>test</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-6">
+                                <h4 class="big-label">
+                                    <label>Email Invoice To</label>
+                                    <span>test</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-6">
+                                <h4 class="big-label">
+                                    <label>Invoice To</label>
+                                    <span>test</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-6">
+                                <h4 class="big-label">
+                                    <label>Invoice Extra Information</label>
+                                    <span>test</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-12">
+                                <h5>communication preferences</h5>
+                            </div>
+                            <div class="col-sm-6">
+                                <h4 class="big-label">
+                                    <label>Automated Reminder Type</label>
+                                    <span>sms & email</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-6">
+                                <h4 class="big-label">
+                                    <label>Unsubscribe from SMS marketing</label>
+                                    <span>true</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-12">
+                                <h5>Referral source (for marketing)</h5>
+                            </div>
+                            <div class="col-sm-6">
+                                <h4>
+                                    <label>Referral Type</label>
+                                    <span>none</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-12">
+                                <h5>Other Information</h5>
+                            </div>
+                            <div class="col-sm-6">
+                                <h4>
+                                    <label>Occupation</label>
+                                    <span>true</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-6">
+                                <h4>
+                                    <label>Emergency contact</label>
+                                    <span>true</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-6">
+                                <h4>
+                                    <label>Medicare Number</label>
+                                    <span>true</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-6">
+                                <h4>
+                                    <label>Reference Number</label>
+                                    <span>true</span>
+                                </h4>
+                            </div>
+                            <div class="col-sm-12">
+                                <h4>
+                                    <label>Notes</label>
+                                    <span>{{ContactDetails.notes}}</span>
+                                </h4>
+                            </div>
+                        </div>
+                     </div>
+                     <div class=" angular-animate " ng-show="edit_contact" >
+                          <div class="clearfix"></div>
+                          <div ng-include="'templates/contact/contact-edit-form.html'"></div>
+                     </div>
+                    </div>
+              </div>
+            </accordion-group>
+          </accordion> -->
+          </div>
+        </div>
+</div>
+<style>.form-control{width:100% !important;}</style>

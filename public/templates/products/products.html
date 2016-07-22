@@ -1,0 +1,24 @@
+<div class="dashboard-con settings">
+	<div class="top-container">
+            <div class="col-md-4 col-xs-4 top-links">
+                <div class="top-links-container ng-scope">
+                    <ul class="open-nav ng-scope">
+                        <li><a href="" class="ng-binding">{{'S_product_main_heading' | translate}}</a></li>
+                    </ul>
+                </div>     
+            </div>
+            <div class="col-md-6 col-xs-6 top-links product-search">
+                <div class="top-links-container ng-scope">
+                    <input type="text" class="form-control" ng-model="FilterProducts" placeholder="{{'S_product_main_search_placeholder' | translate}}"/>
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </div>     
+            </div>
+            <div class="col-md-2 col-xs-2 top-btn cart-btn">
+                <span>{{'S_product_label_addpro' | translate}}</span><button class="save ng-binding" type="submit" ng-click="AddProductshow()"><i class="fa fa-cart-plus"></i></button>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 form-content" ng-scrollbars>
+          <div class="product-con" ui-view></div>
+        </div>
+</div>
+<style>.form-control{width:100% !important;}</style>

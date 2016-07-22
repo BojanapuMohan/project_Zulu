@@ -1,0 +1,277 @@
+<form ng-submit="UpdateUser(user)" id="UserForm" name="UserForm">
+    	<div class="col-md-6">
+        	<h2>{{'S_UP_heading_personal' | translate}}</h2>
+              <div class="form-group col-md-6 col-xs-6 name-con clearfix fname">
+                <label>{{'S_label_firstname' | translate}}</label>
+                <input type="text" class="form-control" placeholder="{{'S_label_firstname' | translate}}" ng-model="user.user_basic.first_name">
+              </div>
+              <div class="form-group col-md-6 col-xs-6 name-con fname">
+                <label>{{'S_label_lastname' | translate}}</label>
+                <input type="text" class="form-control" placeholder="{{'S_label_lastname' | translate}}" ng-model="user.user_basic.last_name">
+              </div>
+              <div class="form-group col-xs-4 city-con">
+                <label>{{'S_label_Title' | translate}}</label>
+                <select class="form-control" ng-model="user.user_basic.title">
+                    <option value="dr">{{'S_UP_title1' | translate}}</option>
+                    <option value="mr">{{'S_UP_title2' | translate}}</option>
+                    <option value="mrs">{{'S_UP_title3' | translate}}</option>
+                    <option value="Miss">{{'S_UP_title4' | translate}}</option>
+                    <option value="Dr">{{'S_UP_title5' | translate}}</option>
+                    <option value="Master">{{'S_UP_title6' | translate}}</option>
+                    <option value="Professor">{{'S_UP_title7' | translate}}</option>
+                    <option value="Sir">{{'S_UP_title8' | translate}}</option>
+                    <option value="Lord">{{'S_UP_title9' | translate}}</option>
+                    <option value="Lady">{{'S_UP_title10' | translate}}</option>
+                    <option value="Dame">{{'S_UP_title11' | translate}}</option>
+                    <option value="Reverend">{{'S_UP_title12' | translate}}</option>
+                    <option value="Sister">{{'S_UP_title13' | translate}}</option>
+                    <option value="Rabbi">{{'S_UP_title14' | translate}}</option>
+                    <option value="King">{{'S_UP_title15' | translate}}</option>
+                    <option value="Zombie Lord">{{'S_UP_title16' | translate}}</option>
+                </select>
+              </div>
+              <div class="form-group col-xs-8 city-con1">
+                <label>{{'S_label_phone' | translate}}</label>
+                <input type="text" class="form-control" placeholder="+91 00000-00000" ng-model="user.user_basic.phone">
+              </div>
+              <div class="form-group">
+                <label>{{'S_label_emailaddress' | translate}}</label>
+                <input type="email" class="form-control" placeholder="{{'S_label_emailaddress_placeholder' | translate}}" ng-model="user.user_basic.email">
+              </div>
+              <div class="form-group">
+                <label>{{'S_UP_label_timezone' | translate}}
+                	<i class="ic info info-hover left-side">
+                        <span>{{'S_UP_label_timezone_info' | translate}}</span>
+                    </i>
+                </label>
+                <select class="form-control" ng-model="user.user_basic.time_zone">
+                    <option ng-repeat="timezones in timezone" value="{{timezones.offset}}">{{timezones.text}}</option>
+                </select>
+              </div>
+              <div class="ifPractitioner angular-animate" ng-show="user.user_basic.is_doctor">
+                  <h2>{{'S_UP_label_P_info' | translate}}</h2>
+                  <div class="remove-margin">
+                      <div class="form-group col-xs-4 city-con pra-info">
+                        <label>{{'S_UP_label_P_type' | translate}}</label>
+                      </div>
+                      <div class="form-group col-xs-4 city-con pra-info">
+                        <label>{{'S_UP_label_P_Num' | translate}}</label>
+                      </div>
+                      <div class="form-group col-xs-4 city-con pra-info">
+                        <label>{{'S_UP_label_P_Bname' | translate}}</label>
+                      </div>
+                   </div>
+                   <div class="clone" ng-repeat="user_refers in user.user_refer" ng-animate="'animate'">
+                      
+                      <div class="form-group col-xs-4 city-con pra-info">
+                        <input type="text"  class="form-control" ng-model="user_refers.ref_type" placeholder="400082"/>
+                      </div>
+                      <div class="form-group col-xs-4 city-con pra-info">
+                        <input type="text"  class="form-control"  ng-model="user_refers.number" placeholder="400082"/>
+                      </div>
+                      <div class="form-group col-xs-4 city-con pra-info">
+                        <select class="form-control" ng-model="user_refers.business_id">
+                           <option ng-repeat="businessLists in businessList" value="{{businessLists.id}}">{{businessLists.name}}</option>
+                        </select>
+                      </div>
+                      <div class="pra-icns">
+                        <a href="" ng-click="removePractitioner($index)"><i class="ic cross"></i></a>
+                      </div>
+
+                  </div>
+                  <div class="pra-icns">
+                    <a href="" ng-click="newPractitioner(businessList[0].id)"><i class="ic add"></i></a>
+                  </div>
+                  <div class="form-group">
+                    <label>{{'S_UP_label_Des' | translate}}
+                        <i class="ic info info-hover left-side">
+                            <span>{{'S_UP_label_Des_info' | translate}}</span>
+                        </i>
+                    </label>
+                    <input type="text" class="form-control" placeholder="Businessman" ng-model="user.practi_info.designation">
+                   </div>
+                   <div class="form-group description">
+                    <label>{{'S_UP_label_Description' | translate}}</label>
+                    <textarea class="form-control" ng-model="user.practi_info.desc"></textarea>
+                   </div>
+                   <div class="form-group check-con online-booking">
+                    <label>{{'S_UP_label_Obooking' | translate}}</label>
+                    <div class="checkbox">
+                        <label>
+                          <input type="checkbox" ng-model="user.practi_info.is_online"><span></span> Show this business in online bookings
+                        </label>
+                    </div>
+                  </div>
+            </div>
+               
+        </div>
+    	<div class="col-md-6">
+        	<h2 class="hv-info">{{'S_UP_label_Cpassword' | translate}}
+            	<i class="ic info info-hover bottom">
+                    <span>{{'S_UP_label_Cpassword_info' | translate}}</span>
+                </i>
+            </h2>
+            <div class="form-group col-md-6 col-xs-6 name-con clearfix password">
+                <label>{{'S_UP_label_password' | translate}}</label>
+                <input type="password" class="form-control" placeholder="{{'S_UP_label_password' | translate}}" ng-model="user.password" ng-required>
+              </div>
+              <div class="form-group col-md-6 col-xs-6 name-con password">
+                <label>{{'S_UP_label_Conpassword' | translate}}</label>
+                <input type="password" class="form-control" placeholder="{{'S_UP_label_password' | translate}}"  ng-model="password2"password-match="user.password" ng-required name="password2">
+
+                 <div class="msg-block" ng-show="UserForm.$error"><span class="msg-error" ng-show="UserForm.password2.$error.unique">{{'S_UP_label_Pass_not' | translate}}</span></div> 
+              </div>
+        	  <div class="form-group fac-con clearfix">
+                <label>{{'S_UP_label_factor' | translate}}
+                	<i class="ic info info-hover">
+                        <span>{{'S_UP_label_factor_info' | translate}}</span>
+                    </i>
+                </label>
+                <a href="">{{'S_UP_label_factor1' | translate}}</a>
+              </div>
+              <h2>{{'S_UP_heading_zulu' | translate}}</h2>
+              <div class="form-group col-md-7 col-xs-7 name-con clearfix">
+                <label>{{'S_UP_label_is_P' | translate}}</label>
+                 <div>
+                <label class="on-off">
+                    <input type="checkbox" ng-model="user.user_basic.is_doctor" ng-change="togglePracti()">
+                    <span class="bg"></span>
+                </label>	
+              </div>
+              </div>
+              <div class="form-group col-md-5 col-xs-5 name-con">
+                <label>{{'S_UP_label_is_A' | translate}}</label>
+                <div>
+                <label class="on-off">
+                    <input type="checkbox" ng-model="user.user_basic.acc_active">
+                    <span class="bg"></span>
+                </label>
+              </div>
+              </div>
+              <div class="form-group">
+                    <label>{{'S_UP_label_Security' | translate}}</label>
+                    <select class="form-control" ng-model="user.user_basic.role">
+                        <option value="Scheduler">{{'S_UP_label_Security_option1' | translate}}</option>
+                        <option value="Receptionist">{{'S_UP_label_Security_option2' | translate}}</option>
+                        <option value="Practitioner">{{'S_UP_label_Security_option3' | translate}}</option>
+                        <option value="Bookeeper">{{'S_UP_label_Security_option4' | translate}}</option>
+                        <option value="Power Receptionist">{{'S_UP_label_Security_option5' | translate}}</option>
+                        <option value="Administrator">{{'S_UP_label_Security_option6' | translate}}</option>
+                    </select>
+               </div>
+              <div class="ifPractitioner angular-animate" ng-show="user.user_basic.is_doctor">
+                <h2>{{'S_UP_heading_select_ser' | translate}}</h2>
+                <div class="form-group check-con cate">
+                  <div class="checkbox" ng-repeat="appointment_service in user.appointment_services">
+                      <label>
+                        <input type="checkbox" value="{{appointment_service.name}}" ng-model="appointment_service.is_selected"><span></span> {{appointment_service.name}}
+                      </label>
+                  </div>
+
+                  <div class="form-group">
+                      <label>{{'S_UP_label_app_type' | translate}}</label>
+                      <select class="form-control" ng-model="user.practi_info.default_type">
+                        <option value="N/A">N/A</option>
+                          <option selected="user.practi_info.default_type" value="{{appointment_service.id}}" ng-repeat="appointment_service in user.appointment_services | filter : {is_selected : true}">{{appointment_service.name}}</option>
+                      </select>
+
+                 </div>
+                 <div class="form-group notify-con">
+                      <label>{{'S_UP_label_cancel_app' | translate}}</label>
+                      <div class="notify">
+                      	<h3>{{'S_UP_label_notify' | translate}}</h3>
+                          <select class="form-control" ng-model="user.practi_info.notify_by">
+                              <option value="sms">{{'S_option_SMS' | translate}}</option>
+                              <option value="email">{{'S_option_email' | translate}}</option>
+                              <option value="sms&email">{{'S_option_sms_email' | translate}}</option>
+                          </select>
+                      </div>
+                      <div class="appointment">
+                      	<h3>{{'S_UP_label_only_if1' | translate}} <br />{{'S_UP_label_only_if2' | translate}}</h3>
+                          <select class="form-control" ng-modal="user.practi_info.cancel_time">
+                              <option ng-repeat="n in range(1,14)" value="{{n}}">{{n}} {{'S_Online_label-min-option4' | translate}}</option>
+                          </select>
+                      </div>
+                 </div>
+                 <div class="form-group online-booking">
+                  <label>{{'S_UP_label_external' | translate}}
+                  	<i class="ic info info-hover">
+                          <span>{{'S_UP_label_external_info' | translate}}</span>
+                      </i>
+                  </label>
+                  <div class="checkbox">
+                      <label>
+                        <input type="checkbox" ng-model="user.practi_info.allow_external_calendar"><span></span> {{'S_UP_label_external_check' | translate}}
+                      </label>
+                  </div>
+                </div>
+             </div>
+         </div>
+        </div>
+        <div class="col-md-12 avail ifPractitioner angular-animate" ng-show="user.user_basic.is_doctor"> 
+        	<h2>{{'S_UP_label_avail' | translate}}</h2>
+
+           <tabset>
+              <tab heading="{{availabilityc.business_name}}" ng-repeat="availabilityc in user.user_availability">
+              	<div class="col-md-6" ng-repeat="availableDays in availabilityc.days">
+                	<div class="col-xs-2">
+                    	<div class="form-group check-con online-booking">
+                            <div class="checkbox">
+                                <label>
+                                  <input type="checkbox" ng-model="availableDays.is_selected"><span></span>
+                                </label>
+                            </div>
+                         </div>
+                    </div>
+                    <div class="col-xs-10 avail-con">
+                    	<div class="avail-master">
+                            <div class="col-xs-3">
+                                <h6>{{availableDays.day_name}}</h6>
+                                <a href="" class="break" ng-click="NewBreak($parent.$index, $index)">{{'S_UP_link_break' | translate}}</a>
+                            </div>
+                            <div class="col-xs-9">
+                                <select class="form-control" ng-model="availableDays.start_hr">
+                                    <option ng-repeat="n in range(00,23)">{{n}}</option>
+                                </select>
+                                <select class="form-control" ng-model="availableDays.start_min">
+                                    <option ng-repeat="n in range(00,55,5)">{{n}}</option>
+                                </select>
+                                <span>To</span>
+                                <select class="form-control" ng-model="availableDays.end_hr">
+                                    <option ng-repeat="n in range(00,23)">{{n}}</option>
+                                </select>
+                                <select class="form-control" ng-model="availableDays.end_min">
+                                    <option ng-repeat="n in range(00,55,5)">{{n}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="avail-master">
+                          <div class="abreak clearfix" ng-repeat="availableDaysBreaks in availableDays.cust_break">
+                            <div class="col-xs-3">
+                                <a href="" class="remove" ng-click="RemoveBreak($parent.$parent.$index, $parent.$index, $index)">{{'S_UP_link_remove' | translate}}</a>
+                            </div>
+                            <div class="col-xs-9">
+                                <select class="form-control" ng-model="availableDaysBreaks.start_hr">
+                                     <option ng-repeat="n in range(00,23)">{{n}}</option>
+                                </select>
+                                <select class="form-control" ng-model="availableDaysBreaks.start_min">
+                                   <option ng-repeat="n in range(00,55,5)">{{n}}</option>
+                                </select>
+                                <span>To</span>
+                                <select class="form-control" ng-model="availableDaysBreaks.end_hr">
+                                    <option ng-repeat="n in range(00,23)">{{n}}</option>
+                                </select>
+                                <select class="form-control" ng-model="availableDaysBreaks.end_min">
+                                    <option ng-repeat="n in range(00,55,5)">{{n}}</option>
+                                </select>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+              </tab>
+              
+           </tabset>
+        </div>
+</form>
+

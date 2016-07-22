@@ -1,0 +1,118 @@
+<form ng-submit="templateForm.$valid && UpdateTemplate(template_note)" id="templateForm" name="templateForm" novalidate >
+<div class="col-md-6 checkup">
+            <h2 class="remove-bottom">{{templateText}} {{template_note.name}}</h2>
+              <div class="form-group">
+                <label>{{'S_Treatment_heading_Tname' | translate}}</label>
+                <input type="text" class="form-control" placeholder="{{'S_Treatment_heading_Tname_placeholder' | translate}}" ng-model="template_note.name" required>
+              </div>
+             <div class="form-group print-title">
+                <h2 class="remove-top">{{'S_Treatment_label_print' | translate}}</h2>
+                <input type="text" class="form-control" placeholder="{{'S_label_Title' | translate}}" ng-model="template_note.title">
+              </div>
+              <div class="form-group check-con patient-detail">
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox" ng-model="template_note.show_patient_addr"><span></span> {{'S_Treatment_option1' | translate}}
+                    </label>
+                </div>
+             </div>
+             <div class="form-group check-con patient-detail">
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox" ng-model="template_note.show_patient_dob"><span></span> {{'S_Treatment_option2' | translate}}
+                    </label>
+                </div>
+             </div>
+             <div class="form-group check-con patient-detail">
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox" ng-model="template_note.show_patient_medicare"><span></span> {{'S_Treatment_option3' | translate}}
+                    </label>
+                </div>
+             </div>
+             <div class="form-group check-con patient-detail">
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox" ng-model="template_note.show_patient_occup"><span></span> {{'S_Treatment_option4' | translate}}
+                    </label>
+                </div>
+             </div>
+        </div>
+        <div class="col-md-6 treatment-con" ui-tree="treeOptions" >
+          <h3>{{'S_Treatment_heading_note' | translate}}</h3>
+             <div class="add-con">
+                    <a href="" ng-click="addSection();" ng-if="template_note.temp_sections_attributes == ''"><i class="ic add"></i> {{'S_Treatment_add_sec' | translate}}</a>
+                </div>
+                <div  ui-tree-nodes ng-model="template_note.temp_sections_attributes" class="temp_sections_attributes">
+            <div class="qust-sec" ng-repeat="section in template_note.temp_sections_attributes" ui-tree-node>
+            	<i ui-tree-handle class="ic drag drag2"></i>
+              <div class=""> 
+                <label>{{'S_Treatment_sec' | translate}}</label>
+                <input type="text" class="form-control prob" placeholder="{{'S_Treatment_problem_placeholder' | translate}}" ng-model="section.name" />
+                <a  href="" class="remove-btn" ng-click="removeSection($index)"><i class="ic cross"></i> {{'S_Treatment_remove' | translate}}</a>
+                <a  href="" class="add-btn" ng-click="addSection()"><i class="ic add"></i> {{'S_Treatment_add' | translate}}</a>
+                <div ui-tree-nodes  ng-model="section.questions_attributes"  class=" questions_attributes col-sm-11 pull-right">
+                <div class="problem-con" ui-tree-node ng-repeat="question in section.questions_attributes">
+					     <i class="ic drag drag1" ui-tree-handle></i>
+                    <div class="form-group questionCnt">
+                        <label>{{'S_Treatment_Question' | translate}}</label>
+                        <input type="text" class="form-control" placeholder="{{'S_Treatment_sec_placeholder' | translate}}" ng-model="question.title">
+                    </div>
+                    <div class="form-group">
+                        <label>&nbsp;</label>
+                        <select class="form-control" ng-model="question.q_type" ng-change="ChangeQuestionType($index)">
+                            <option value="Text">{{'S_Treatment_que_option1' | translate}}</option>
+                            <option value="Paragraph">{{'S_Treatment_que_option2' | translate}}</option>
+                            <option value="Multiple_Choice">{{'S_Treatment_que_option3' | translate}}</option>
+                            <option value="Checkboxes">{{'S_Treatment_que_option4' | translate}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>{{'S_Treatment_answer' | translate}}</label>
+                        <div ng-if="question.q_type == 'Text'">
+                            <input type="text" class="form-control" placeholder="" ng-model="answers.value" ng-repeat="answers in question.quest_choices_attributes" disabled>
+                        </div>
+                        <div ng-if="question.q_type == 'Paragraph'">
+                            <textarea ng-model="answers.text" class="form-control" ng-repeat="answers in question.quest_choices_attributes" disabled></textarea>
+                        </div>
+
+                        <div ng-if="question.q_type == 'Multiple_Choice'" class="form-group medi radio-con">
+                            <div class="radio" ng-repeat="answers in question.quest_choices_attributes">
+                                <label>
+                                  <input disabled type="radio" ><span></span> <input type="text" class="form-control"  ng-model="answers.title"/>
+                                   <a data-nodrag href="" ng-click="RemoveAnswer($parent.$parent.$parent.$index, $parent.$index, $index, answers.id)"><i class="ic cross"></i></a>
+                                </label>
+                            </div>
+                            <div class="add-con add-answer">
+                                <a data-nodrag href="" ng-click="AddAnswer($parent.$parent.$index, $parent.$index)"><i class="ic add"></i> {{'S_Treatment_addAnswer' | translate}}</a>
+                            </div>
+                        </div>
+
+                        <div ng-if="question.q_type == 'Checkboxes'" class="form-group medi radio-con">
+                            <div class="checkbox" ng-repeat="answers in question.quest_choices_attributes">
+                                <label>
+                                  <input disabled type="checkbox" ><span></span> <input type="text" class="form-control"  ng-model="answers.title"/>
+                                   <a href="" ng-click="RemoveAnswer($parent.$parent.$parent.$index, $parent.$index, $index, answers.id)"><i class="ic cross"></i></a>
+                                </label>
+                            </div>
+                             <div class="add-con add-answer">
+                                 <a href="" ng-click="AddAnswer($parent.$parent.$index, $parent.$index)"><i class="ic add"></i> {{'S_Treatment_addAnswer' | translate}}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="add-con remove-ques">
+                    <a data-nodrag href="" ng-click="RemoveQuestion($parent.$index, $index, question.id);"><i class="ic cross"></i> {{'S_Treatment_removeQue' | translate}}</a>
+                </div>
+              </div>
+                </div>
+                <div class="add-con add-ques">
+                    <a href="" ng-click="AddQuestion($index);" data-nodrag><i class="ic add"></i> {{'S_Treatment_addQue' | translate}}</a>
+                </div>
+                </div>
+                </div>
+            </div>
+            
+        </div>
+    </form>
+
+

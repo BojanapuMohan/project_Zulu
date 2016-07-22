@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Welcome to Zulu.com</h1>
+    <p>
+      Your account have successfully created on Zulu.com
+      your email is: <%= @user.email %>.<br>
+      your password is: <%= @password %>.<br>
+    </p>
+    <p>
+      To login to the site, just follow this link: <%= link_to @url , @url %>.
+      
+    </p>
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+<div class="dashboard-con settings">
+    <div class="top-container">
+        <div class="col-md-8 col-xs-5 top-links">
+            <div class="top-links-container" ng-include="'templates/settings/common/top-links.html'"></div>    
+        </div>
+        <div class="col-md-4 col-xs-7 top-btn btn4">
+            <button class="save" type="submit" form="BilableForm">{{btnText | translate}}</button>
+            <button class="cancel">{{'S_button_cancel' | translate}}</button>
+            <button class="cancel" ng-click="billDelete('sm')" ng-hide="billdeleteText">{{'S_button_delete' | translate}}</button>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 bus-con">
+        <div class="col-md-2 side-bar-con">
+            <div class="side-bar">
+                <div class="side-bar-header">
+                    <h5 class="with-two-icn">{{'S_Billable_main_heading' | translate}}</h5>
+                    <a href="" ui-sref="settings.billable-items.info({bilable_id:'new'})">
+                    	<i class="ic bus-icn add-ic"></i>
+                    	<span>{{'S_tool-tip-addnew' | translate}}</span>
+                    </a>
+                    <a ui-sref="settings.billable-items.info({bilable_id:'newServ'})" class="">
+                    	<i class="ic bus-icn money"></i>
+                    	<span>{{'S_tool-tip-addother' | translate}}</span>
+                    </a>
+                </div>
+                <div class="side-bar-search">
+                    <form>
+                        <input type="text" class="form-control" placeholder="{{'S_placeholder-Search' | translate}}" ng-model="FilterBilable" />
+                        <button type="submit" disabled="disabled"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="side-bar-links side-info billing-items" ng-scrollbars rebuild-on-resize rebuild-on="rebuild:me">
+                	<ul>
+                        <li ng-repeat="BilableItems in BilableItemsList | filter:{name : FilterBilable}">
+                        	<a href="" ui-sref="settings.billable-items.info({bilable_id:BilableItems.id})" ui-sref-active="active">{{BilableItems.name}}
+                        	 
+                            </a>
+                             <md-tooltip class="customtooltip angular-animate billable-tooltip" md-direction="right">
+                                <ul>
+                                    <li><h6>Item Type</h6><p>{{BilableItems.item_code}}</p></li>
+                                    <li><h6>Price</h6><p>{{BilableItems.name}}</p></li>                
+                                    <li><h6>Tax</h6><p>{{BilableItems.tax}}</p></li>                    
+                                </ul>
+                              </md-tooltip>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" col-md-10 col-sm-10 form-content info-container " ng-scrollbars rebuild-on-resize>
+    	<div ui-view></div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<script type="text/ng-template" id="DeleteModal.html">
+        <div class="modal-body confirm-body">
+			<div class="confirm">
+                <p>{{'S_Billable_confirmation-msg' | translate}}</p>
+                <a href="" ng-click="okdelete()">confirm</a>
+                <a href="" ng-click="cancel()">cancel</a>
+            </div>
+        </div>
+</script>

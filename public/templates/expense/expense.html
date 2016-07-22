@@ -1,0 +1,423 @@
+<div class="dashboard-con settings">
+	<div class="top-container">
+            <div class="col-md-4 col-xs-4 top-links">
+                <div class="top-links-container ng-scope">
+                    <ul class="open-nav ng-scope">
+                        <li><a href="" class="ng-binding">{{'S_exp_main_heading' | translate}}</a></li>
+                    </ul>
+                </div>     
+            </div>
+            <div class="col-md-6 col-xs-6 top-links product-search">
+                <div class="top-links-container ng-scope">
+                    <input type="text" class="form-control" ng-model="FilterExpense" placeholder="{{'S_exp_search_placeholder' | translate}}"/>
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </div>     
+            </div>
+            <div class="col-md-2 col-xs-2 top-btn cart-btn">
+                <span>{{'S_exp_add_exp' | translate}}</span><button class="save ng-binding" type="submit" ng-click="new_exp()"><i class="fa fa-credit-card"></i></button>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 form-content" ng-scrollbars>
+          <div class="product-con">
+          <form ng-submit="CreateExpenses(NewExpenses)" id="" class="products" ng-if="new_expense" name="" novalidate >
+                <div class="col-md-6">
+                    <h3>&nbsp;</h3>
+                </div>
+                <div class="col-md-6 top-btn inner-btns product-save">
+                    <button class="save">{{'S_button_save' | translate}}</button>
+                    <button class="cancel" ng-click="new_exp_Hide()">{{'S_button_cancel' | translate}}</button>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-sm-5">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Expense date</label>
+    								<input type="text" class="form-control my-date" pick-a-date="date" pick-a-date-options="{ format: 'yyyy-mm-dd' }" ng-model="NewExpenses.expense_date" />
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Business</label>
+                                    <select class="form-control" ng-model="NewExpenses.business_name" >
+                                        <option ng-repeat="business in businessList" value="{{business.id}}">{{business.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Vendor</label>
+                                    <input type="text" class="form-control" ng-model="NewExpenses.vendor" required/>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Category</label>
+                                    <input type="text" class="form-control" ng-model="NewExpenses.category" required/>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Total expense amount (including tax)</label>
+                                    <input type="text" class="form-control" ng-model="NewExpenses.total_expense" ng-change="CalculateTax()"/>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="col-sm-7">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Tax</label>
+                                    <select class="form-control" ng-model="NewExpenses.tax" ng-change="CalculateTax()">
+                                        <option value="">N/A</option>
+                                        <option ng-repeat="tax in taxList" value="{{tax.id}}">{{tax.name}} ({{tax.amount}}%)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Tax amount 
+                                    	<i class="ic info info-hover">
+                                            <span class="ng-binding">You may need to adjust this manually if only part of the expense was taxable.</span>
+                                        </i>
+                                    </label>
+                                    <input type="text" class="form-control" ng-model="NewExpenses.tax_amount" />
+                                </div>
+                            </div>
+                        <div class="col-sm-12">
+                            <div class="form-group notes-box">
+                                <label>{{'S_product_label_note' | translate}}</label>
+                                <textarea ng-model="NewExpenses.note" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                <div class="col-md-12">
+                    <div class="col-sm-12 yes-no">
+                    	<div class="form-group">
+                            <label class="ng-binding">Is this expense a products purchase?
+                                <i class="ic info info-hover">
+                                    <span class="ng-binding">If yes, this will automatically update product stock levels and cost prices if applicable</span>
+                                </i>
+                            </label>
+                            <div class="clearfix"></div>
+                            <div class="temp" >
+                                <div class="form-group medi radio-con">
+                                    <div class="radio">
+                                        <label class="ng-binding">
+                                          <input type="radio" ng-model="NewExpenses.include_product_price" name="stock_level" value="true"><span></span> Yes
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group medi radio-con">
+                                    <div class="radio">
+                                        <label class="ng-binding">
+                                          <input type="radio" ng-model="NewExpenses.include_product_price" name="stock_level" value="false" ><span></span> No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 yes-no angular-animate" ng-if="NewExpenses.include_product_price == 'true'" >
+                        <div class="table-responsive exp">
+                            <table class="table table-condensed ">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Unit Cost Price (ex. tax)</th>
+                                        <th>Quantity</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="ExpenseProduct in NewExpenses.expense_products_attributes">
+                                        <td class="search-td">
+                                            
+                                              <md-content class="md-padding">
+                                                   <md-autocomplete
+                                                    md-selected-item="ExpenseProduct.name"
+                                                    md-search-text="searchTextp"
+                                                    md-items="item in ProductsList"
+                                                    md-item-text="item.name"
+                                                    placeholder="Search"
+                                                    md-min-length="0">
+                                                   <span md-highlight-text="searchText">{{item.name}}</span>
+                                                  <md-item-template>
+                                                      <span md-highlight-text="searchTextp" md-highlight-flags="^i">{{item.name}}</span>
+                                                </md-item-template>
+                                                </md-autocomplete>
+                                                
+                                            </md-content>
+                                        </td>
+                                        <td class="small-input">
+                                        	<div class="cur">
+                                            	<input type="text" class="form-control" ng-model="ExpenseProduct.unit_cost_price">
+                                                <label>Rs.</label>
+                                            </div>
+                                        </td>
+                                        <td class="small-input">
+                                            <input type="text" class="form-control" ng-model="ExpenseProduct.quantity">
+                                        </td>
+                                        <td class="">
+                                            <a href="" class="remove" ng-click="removeExpenseProduct($index)"><i class="ic cross"></i> Remove</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <a href="" class="add-btn" ng-click="addExpenseProduct();"><i class="ic add"></i> Add product</a>
+                    </div>
+                </div>
+        </form>
+        <div class="clearfix"></div>
+                 <accordion close-others="true">
+                    <accordion-group  ng-repeat="Expense in ExpenseList | filter:FilterExpense" is-open="Expense.isopen" class="my-group">
+                    <accordion-heading>
+
+                        <div class="productsdetails" style="outline:none"  ng-click="opened($index, Expense.id)">
+                           <div class="col-sm-2">{{'S_exp_label1' | translate}} : {{Expense.expense_date}}</div>
+                           <div class="col-sm-2">{{'S_exp_label2' | translate}} : {{Expense.vendor}} </div>
+                           <div class="col-sm-2">{{'S_exp_label3' | translate}} : {{Expense.category}}</div>
+                           <div class="col-sm-2">{{'S_exp_label4' | translate}} : {{Expense.total_expense}}</div>
+                           <div class="col-sm-4 text-right">
+                            <button class="" ng-click="DeleteExpense(Expense.id, $event)"><i class="fa fa-trash"></i></button>
+                           </div>
+                       </div>
+                    </accordion-heading>
+                      <div ng-if="showExpenseDetails($index)" class="no-animate">
+                            <div class="ExpenseDetails" ng-if="ExpenseDetails">
+                                <div class="col-sm-6 productInfo">
+                                    <h4>
+                                        <label>{{'S_exp_label5' | translate}} </label>
+                                        <span>{{ExpenseDetail.id}}</span>
+                                    </h4>
+                                    <h4>
+                                        <label>{{'S_exp_label1' | translate}}</label>
+                                        <span>{{ExpenseDetail.expense_date}}</span>
+                                    </h4>
+                                    <h4>
+                                        <label>{{'S_exp_label6' | translate}}</label>
+                                        <span>{{ExpenseDetail.created_by}}</span>
+                                    </h4>
+                                    <h4>
+                                        <label>{{'S_exp_label2' | translate}}</label>
+                                        <span>{{ExpenseDetail.vendor}}</span>
+                                    </h4>
+                                    <h4>
+                                        <label>{{'S_exp_label3' | translate}}</label>
+                                        <span>{{ExpenseDetail.category}}</span>
+                                    </h4>
+                                   
+                                    <h4>
+                                        <label>{{'S_exp_label7' | translate}}</label>
+                                        <span>{{ExpenseDetail.note}}</span>
+                                    </h4>
+                                    <h4>
+                                        <label>{{'S_exp_label8' | translate}}</label>
+                                        <span>{{ExpenseDetail.sub_amount}}</span>
+                                    </h4>
+                                    <h4>
+                                        <label>{{'S_exp_label9' | translate}}</label>
+                                        <span>{{ExpenseDetail.tax_amount}}</span>
+                                    </h4>
+                                    <h4>
+                                        <label>{{'S_exp_label10' | translate}}</label>
+                                        <span>{{ExpenseDetail.total_expense}}</span>
+                                    </h4>
+                                </div>
+                                <div class="col-sm-6 pull-right edit-product">
+                                    <button class="ng-binding" ng-click="sEditExpense($index, Expense.id)"><i class="fa fa-edit"></i>{{'S_button_edit' | translate}}</button>
+                                </div>
+                                <table class="table table-responsive product-list" ng-if="ExpenseDetail.expense_products_attributes.length">
+                                    <thead>
+                                        <tr>
+                                            <th>Product </th>
+                                            <th>Unit Cost Price (ex. tax)</th>
+                                            <th>{{'S_product_table_heading2' | translate}}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="product in ExpenseDetail.expense_products_attributes">
+                                            <td>{{product.name}}</td>
+                                           
+                                            <td>{{product.unit_cost_price}}</td>
+                                             <td>{{product.quantity}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                             </div>
+                                
+                            </div>
+                            <div class=" angular-animate " ng-if="edit_bar" >
+                                 <form ng-submit="UpdateExpenses(NewExpenses)" id="" class="products" ng-if="edit_bar" name="" novalidate >
+                                        <div class="col-md-6">
+                                            <h3>&nbsp;</h3>
+                                        </div>
+                                        <div class="col-md-6 top-btn inner-btns product-save">
+                                            <button class="save">{{'S_button_save' | translate}}</button>
+                                            <button class="cancel" ng-click="new_exp_Hide()">{{'S_button_cancel' | translate}}</button>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-sm-5">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Expense date</label>
+                                                            <input type="text" class="form-control my-date" pick-a-date="date" pick-a-date-options="{ format: 'yyyy-mm-dd' }" ng-model="NewExpenses.expense_date" />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Business</label>
+                                                            <select class="form-control" ng-model="NewExpenses.business_name" >
+                                                                <option ng-repeat="business in businessList" value="{{business.id}}">{{business.name}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Vendor</label>
+                                                            <input type="text" class="form-control" ng-model="NewExpenses.vendor" required/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Category</label>
+                                                            <input type="text" class="form-control" ng-model="NewExpenses.category" required/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix"></div>
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                            <label>Total expense amount (including tax)</label>
+                                                            <input type="text" class="form-control" ng-model="NewExpenses.total_expense" ng-change="CalculateTax()"/>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                            <div class="col-sm-7">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Tax</label>
+                                                            <select class="form-control" ng-model="NewExpenses.tax" ng-change="CalculateTax()">
+                                                                 <option ng-repeat="tax in taxList" value="{{tax.id}}">{{tax.name}} ({{tax.amount}}%)</option>
+                                                                  <option value="">N/A</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Tax amount 
+                                                                <i class="ic info info-hover">
+                                                                    <span class="ng-binding">You may need to adjust this manually if only part of the expense was taxable.</span>
+                                                                </i>
+                                                            </label>
+                                                            <input type="text" class="form-control" ng-model="NewExpenses.tax_amount" />
+                                                        </div>
+                                                    </div>
+                                                <div class="col-sm-12">
+                                                    <div class="form-group notes-box">
+                                                        <label>{{'S_product_label_note' | translate}}</label>
+                                                        <textarea ng-model="NewExpenses.note" class="form-control"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                         </div>
+                                        <div class="col-md-12">
+                                            <div class="col-sm-12 yes-no">
+                                                <div class="form-group">
+                                                    <label class="ng-binding">Is this expense a products purchase?
+                                                        <i class="ic info info-hover">
+                                                            <span class="ng-binding">If yes, this will automatically update product stock levels and cost prices if applicable</span>
+                                                        </i>
+                                                    </label>
+                                                    <div class="clearfix"></div>
+                                                    <div class="temp" >
+                                                        <div class="form-group medi radio-con">
+                                                            <div class="radio">
+                                                                <label class="ng-binding">
+                                                                  <input type="radio" ng-model="NewExpenses.include_product_price" name="stock_level" value="true"><span></span> Yes
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group medi radio-con">
+                                                            <div class="radio">
+                                                                <label class="ng-binding">
+                                                                  <input type="radio" ng-model="NewExpenses.include_product_price" name="stock_level" value="false" ><span></span> No
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 yes-no angular-animate" ng-if="NewExpenses.include_product_price == 'true'" >
+                                                <div class="table-responsive exp">
+                                                    <table class="table table-condensed ">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Product</th>
+                                                                <th>Unit Cost Price (ex. tax)</th>
+                                                                <th>Quantity</th>
+                                                                <th>&nbsp;</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="ExpenseProduct in NewExpenses.expense_products_attributes">
+                                                                <td class="search-td">
+                                                                    
+                                                                      <md-content class="md-padding">
+                                                                           <md-autocomplete
+                                                                            md-selected-item="ExpenseProduct.name"
+                                                                            md-search-text="searchTextp"
+                                                                            md-items="item in ProductsList"
+                                                                            md-item-text="item.name"
+                                                                            placeholder="Search"
+                                                                            md-min-length="0">
+                                                                           <span md-highlight-text="searchText">{{item.name}}</span>
+                                                                          <md-item-template>
+                                                                              <span md-highlight-text="searchTextp" md-highlight-flags="^i">{{item.name}}</span>
+                                                                        </md-item-template>
+                                                                        </md-autocomplete>
+                                                                        
+                                                                    </md-content>
+                                                                </td>
+                                                                <td class="small-input">
+                                                                    <div class="cur">
+                                                                        <input type="text" class="form-control" ng-model="ExpenseProduct.unit_cost_price">
+                                                                        <label>Rs.</label>
+                                                                    </div>
+                                                                </td>
+                                                                <td class="small-input">
+                                                                    <input type="text" class="form-control" ng-model="ExpenseProduct.quantity">
+                                                                </td>
+                                                                <td class="">
+                                                                    <a href="" class="remove" ng-click="removeExpenseProduct($index)"><i class="ic cross"></i> Remove</a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <a href="" class="add-btn" ng-click="addExpenseProduct();"><i class="ic add"></i> Add product</a>
+                                            </div>
+                                        </div>
+                                </form>
+
+                            </div>
+                              
+                              
+                            
+                      </div>
+                    </accordion-group>
+                  </accordion>
+          </div>
+        </div>
+</div>
+<style>.form-control{width:100% !important;}</style>
+<script type="text/ng-template" id="DeleteExpenceConfirm.html">
+        <div class="modal-body confirm-body">
+            <div class="confirm">
+                <h3>Confirmation</h3>
+                <p>Do you really want to delete??</p>
+                <a href="" ng-click="hitSmsUPdate(plan.id);">{{'S_button_confirm' | translate}}</a>
+                <a href="" ng-click="cancel()">{{'S_button_cancel' | translate}}</a>
+            </div>
+        </div>
+</script>

@@ -1,0 +1,72 @@
+<div class="dashboard-con settings">
+    <div class="top-container">
+        <div class="{{settingtopClasses1}}">
+            <div class="top-links-container" ng-include="'templates/settings/common/top-links.html'"></div>     
+        </div>
+        <div class="{{settingtopClasses2}}" ng-hide="hideBusinessCancel">
+            <button class="save" type="submit" form="businessForm">{{mainButton | translate}}</button>
+            <button class="cancel" ng-click="$state.go('settings.business')">{{'S_button_cancel' | translate}}</button>
+            <!--<button class="cancel" ng-click="DeleteBusiness()" ng-show="showDelete" data-toggle="modal" data-target="#myModal">Delete</button>-->
+            <button class="cancel" ng-show="showDelete" ng-click="openDelete('sm')">{{'S_button_delete' | translate}}</button>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 bus-con">
+        <div class="col-md-2 side-bar-con">
+            <div class="side-bar">
+                <div class="side-bar-header">
+                    <h5>{{'S_Bussiness_main_heading' | translate}}</h5>
+                    <a ui-sref="settings.business.new" class="">
+                    	<i class="ic bus-icn"></i>
+                    	<span>{{'S_tool-tip-addnew' | translate}}</span>
+                    </a>
+                </div>
+                <div class="side-bar-search">
+                    <form>
+                        <input type="text" class="form-control" placeholder="{{'S_placeholder-Search' | translate}}" ng-model="bListFilter" />
+                        <button type="submit" disabled="disabled"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="side-bar-links side-info billing-items bussiness-items" ng-scrollbars rebuild-on-resize rebuild-on="rebuild:me">
+                	<ul>
+                    	<li class="no-animate" ng-repeat="business in businessList | filter:{name : bListFilter}" ><a href="" ui-sref="settings.business.info({business_id:business.id})" ui-sref-active="active">{{business.name}}
+                            
+                        </a>
+
+                        <md-tooltip class="customtooltip angular-animate select-business" md-direction="right" ng-if="business.address || business.city || business.country">
+                                <ul>
+                                    <li ng-hide="!business.address"> <h6>{{business.address}}</h6></li> 
+                                    <li ng-hide="!business.city"><h6>{{business.city}} {{business.pin_code}}</h6></li> 
+                                    <li ng-hide="!business.country"><h6>{{business.country}}</h6></li> 
+                                </ul>
+                        </md-tooltip>
+                    </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   
+    <div class=" col-md-10 col-sm-10 form-content info-container" ng-scrollbars rebuild-on-resize rebuild-on="rebuild:me"> 
+         <div ui-view></div>
+    	<div ng-show="showBlank" class="col-md-12">
+        	<div class="select-user">
+            	<img src="assets/user-select.png" alt="" />
+                <h6>{{'S_Bussiness_select-info' | translate}}</h6>
+            </div>
+              
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<script type="text/ng-template" id="DeleteModal.html">
+        <div class="modal-body confirm-body">
+			<div class="confirm">
+                <p>{{'S_Bussiness_confirmation-msg' | translate}}</p>
+                <a href="" ng-click="okdelete()">confirm</a>
+                <a href="" ng-click="cancel()">cancel</a>
+            </div>
+        </div>
+</script>

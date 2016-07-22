@@ -1,0 +1,184 @@
+<div class="dashboard-con settings">
+	<form ng-submit="settingSubmit(account)">
+    	<div class="top-container">
+            <div class="col-md-9 col-xs-6 top-links">
+                <div class="top-links-container" ng-include="'templates/settings/common/top-links.html'"></div>     
+            </div>
+            <div class="col-md-3 col-xs-6 top-btn">
+                <button class="save" type="submit">{{'S_button_save' | translate}}</button>
+                <button class="cancel">{{'S_button_cancel' | translate}}</button>
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 form-content printing" ng-scrollbars rebuild-on-resize>
+        	<div class="col-md-6">
+            	<h2>{{'S_doc_heading' | translate}}</h2>
+                <div class="form-group">
+                	<div class="col-md-7">
+                    	<label class="logo-com">{{'S_Online_label-logo' | translate}}</label>
+                        <div class="img-con">
+                            <img src="/assets/logo-img.png" alt="" />
+                        </div>
+                    </div>
+                    <div class="col-md-5 logo-height">
+                    	<label>{{'S_doc_label_height' | translate}}
+                        	<i class="ic info info-hover bottom">
+                                <span>{{'S_doc_label_height_info' | translate}}</span>
+                            </i>
+                        </label>
+                        <div class="logo-height-con">
+                            <select class="form-control">
+                                <option ng-repeat="n in range(5,400,5)">{{n}}</option>
+                            </select>
+                            <span>{{'S_doc_label_height_tip' | translate}}</span>
+                         </div>
+                    </div>
+                </div>
+                <h2>{{'S_doc_label_invoice' | translate}}</h2>
+                <div class="form-group clear-div">
+                	<div class="col-md-4 logo-height">
+                    	<label>{{'S_doc_label_pagesize' | translate}}</label>
+                        <div class="logo-height-con">
+                            <select class="form-control">
+                                <option>{{'S_doc_label_pagesize_option1' | translate}}</option>
+                                <option>{{'S_doc_label_pagesize_option2' | translate}}</option>
+                                <option>{{'S_doc_label_pagesize_option3' | translate}}</option>
+                            </select>
+                         </div>
+                    </div>
+                    <div class="col-md-8 logo-height">
+                    	<label>{{'S_doc_label_topmargin' | translate}}
+                        	<i class="ic info info-hover">
+                                <span>{{'S_doc_label_topmargin_info' | translate}}</span>
+                            </i>
+                        </label>
+                        <div class="logo-height-con">
+                            <select class="form-control">
+                                <option ng-repeat="n in range(5,400,5)">{{n}}</option>
+                            </select>
+                            <span>{{'S_doc_label_height_tip' | translate}}</span>
+                         </div>
+                    </div>
+                </div>
+                <h2>{{'S_doc_heading_accstate' | translate}}</h2>
+                <div class="form-group clear-it">
+                   <label>{{'S_label_Title' | translate}}</label>
+                   <input type="text" class="form-control" placeholder="{{'S_doc_heading_accstate' | translate}}" />
+                </div>
+            </div>
+            <div class="col-md-6">
+            	<h2>{{'S_doc_heading_letter' | translate}}</h2>
+                <div class="form-group clear-div">
+                	<div class="col-md-5 logo-height check-con enable">
+                    	<label>{{'S_doc_label_display' | translate}}</label>
+                        <div class="checkbox">
+                            <label class="enable-check">
+                              <input type="checkbox"><span></span> {{'S_doc_label_display_check' | translate}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-7 logo-height">
+                    	<label>{{'S_doc_label_space' | translate}}
+                        	<i class="ic info info-hover bottom">
+                                <span>{{'S_doc_label_space_info' | translate}}</span>
+                            </i>
+                        </label>
+                        <div class="logo-height-con">
+                            <select class="form-control">
+                                <option ng-repeat="n in range(1,100)">{{n}}</option>
+                            </select>
+                            <span>{{'S_doc_tip_mm' | translate}}</span>
+                         </div>
+                    </div>
+                </div>
+                <div class="margin-count">
+                    <div class="col-md-3 logo-height clear-it">
+                        <label>{{'S_doc_label_M_top' | translate}}
+                            <i class="ic info info-hover">
+                                <span>{{'S_doc_label_M_top_info' | translate}}</span>
+                            </i>
+                        </label>
+                        <div class="logo-height-con">
+                            <select class="form-control">
+                                <option ng-repeat="n in range(5,400,5)">{{n}}</option>
+                            </select>
+                            <span>{{'S_doc_tip_mm' | translate}}</span>
+                         </div>
+                    </div>
+                    <div class="col-md-3 logo-height">
+                        <label>{{'S_doc_label_M_bottom' | translate}}
+                            <i class="ic info info-hover">
+                                <span>{{'S_doc_label_M_bottom' | translate}}</span>
+                            </i>
+                        </label>
+                        <div class="logo-height-con">
+                            <select class="form-control">
+                                <option ng-repeat="n in range(5,400,5)">{{n}}</option>
+                            </select>
+                            <span>{{'S_doc_tip_mm' | translate}}</span>
+                         </div>
+                    </div>
+                    <div class="col-md-3 logo-height">
+                        <label>{{'S_doc_label_M_left' | translate}}</label>
+                        <div class="logo-height-con">
+                            <select class="form-control">
+                                <option ng-repeat="n in range(5,400,5)">{{n}}</option>
+                            </select>
+                            <span>{{'S_doc_tip_mm' | translate}}</span>
+                         </div>
+                    </div>
+                    <div class="col-md-3 logo-height">
+                        <label>{{'S_doc_label_M_right' | translate}}</label>
+                        <div class="logo-height-con">
+                            <select class="form-control">
+                                <option ng-repeat="n in range(5,400,5)">{{n}}</option>
+                            </select>
+                            <span>{{'S_doc_tip_mm' | translate}}</span>
+                         </div>
+                    </div>
+                </div>
+                <h2>{{'S_Treatment_main_heading' | translate}}</h2>
+                <div class="form-group clear-div">
+                	<div class="col-md-5 logo-height check-con enable">
+                    	<label>{{'S_doc_label_display' | translate}}</label>
+                        <div class="checkbox remove-margin">
+                            <label class="enable-check ">
+                              <input type="checkbox"><span></span>  {{'S_doc_label_logoon' | translate}}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-3 logo-height push-right">
+                    	<label>{{'S_doc_label_pagesize' | translate}}</label>
+                        <div class="logo-height-con">
+                            <select class="form-control">
+                                <option>{{'S_doc_label_pagesize_option1' | translate}}</option>
+                                <option>{{'S_doc_label_pagesize_option2' | translate}}</option>
+                                <option>{{'S_doc_label_pagesize_option3' | translate}}</option>
+                            </select>
+                         </div>
+                    </div>
+                    <div class="col-md-4 logo-height">
+                    	<label>{{'S_doc_label_M_top' | translate}}
+                        	<i class="ic info info-hover right-side">
+                                <span>{{'S_doc_label_M_top_info' | translate}}</span>
+                            </i>
+                        </label>
+                        <div class="logo-height-con">
+                            <select class="form-control">
+                                <option ng-repeat="n in range(5,400,5)">{{n}}</option>
+                            </select>
+                            <span>{{'S_doc_tip_mm' | translate}}</span>
+                         </div>
+                    </div>
+                    <div class="col-md-12 logo-height check-con enable">
+                    	<label>{{'S_doc_label_hide' | translate}}</label>
+                        <div class="checkbox">
+                            <label class="enable-check">
+                              <input type="checkbox"><span></span> {{'S_doc_label_hide_check' | translate}}  
+                            </label>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </div>
+    </form>
+</div>

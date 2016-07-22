@@ -1,0 +1,74 @@
+<div class="dashboard-con settings">
+	<form ng-submit="settingSubmit(account)">
+    	<div class="top-container">
+            <div class="col-md-12 col-xs-12 top-links export">
+                <div class="top-links-container" ng-include="'templates/settings/common/top-links.html'"></div>     
+            </div>
+        </div>
+        <div class="col-md-12 col-sm-12 form-content" ng-scrollbars rebuild-on-resize>
+        	<div class="col-md-12">
+            	<h2 class="autowid">{{'S_export_heading' | translate}}
+                </h2>
+                <div class="form-group data-import">
+                	<div class="data-export">
+                      <label>{{'S_export_label_export' | translate}}</label>
+                      <select class="form-control">
+                        <option>Appointments</option>
+                       </select>
+                       <label>{{'S_export_label_occuring' | translate}}</label>
+                       <input type="text" class="form-control" placeholder="{{'S_export_placeholder1' | translate}}" />
+                        <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+                       <label>{{'S_export_label_to' | translate}}</label>
+                       <input type="text" class="form-control" placeholder="{{'S_export_placeholder2' | translate}}" />
+                       <button type="submit">{{'S_export_button_export' | translate}}</button>
+                    </div>
+                </div>
+                <div class="table-responsive import-data">
+                	<table class="table">
+                    	<thead>
+                        	<tr>
+                            	<th>{{'S_export_table_heading1' | translate}}</th>
+                            	<th>{{'S_export_table_heading2' | translate}}</th>
+                            	<th>{{'S_export_table_heading3' | translate}}</th>
+                                <th>{{'S_export_table_heading4' | translate}}</th>
+                            	<th>&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        	<tr>
+                            	<td>Appointment (1)</td>
+                            	<td>1st Sept 2015 - 3rd Sept 2015</td>
+                            	<td>Appointments-ZULU-03092015<br />From01092015-To-03092015<br />csv (445 Bytes)</td>
+                                <td>3rd Sept 2015<br />12.19 am</td>
+                            	<td class="import-btn-con">
+                                	<a href="">{{'S_button_download' | translate}}</a>
+                                	<a href="" class="delete">{{'S_button_delete' | translate}}</a>
+                                </td>
+                            </tr>
+                            <tr>
+                            	<td>Appointment (1)</td>
+                            	<td>1st Sept 2015 - 3rd Sept 2015</td>
+                            	<td>Appointments-ZULU-03092015<br />From01092015-To-03092015<br />csv (445 Bytes)</td>
+                                <td>3rd Sept 2015<br />12.19 am</td>
+                            	<td class="import-btn-con">
+                                	<a href="">{{'S_button_download' | translate}}</a>
+                                	<a href="" class="delete">{{'S_button_delete' | translate}}</a>
+                                </td>
+                            </tr>
+                            <tr>
+                            	<td>Appointment (1)</td>
+                            	<td>1st Sept 2015 - 3rd Sept 2015</td>
+                            	<td>Appointments-ZULU-03092015<br />From01092015-To-03092015<br />csv (445 Bytes)</td>
+                                <td>3rd Sept 2015<br />12.19 am</td>
+                            	<td class="import-btn-con">
+                                	<a href="">{{'S_button_download' | translate}}</a>
+                                	<a href="" class="delete">{{'S_button_delete' | translate}}</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

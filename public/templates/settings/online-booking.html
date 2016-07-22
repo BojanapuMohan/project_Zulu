@@ -1,0 +1,201 @@
+
+<div class="dashboard-con settings">
+    <form ng-submit="updateBooking(booking_info.logo, booking_info)" name="OnlineBookingSetting">
+    <div class="top-container">
+        <div class="col-md-9 col-xs-6 top-links">
+            <div class="top-links-container" ng-include="'templates/settings/common/top-links.html'"></div>    
+        </div>
+        <div class="col-md-3 col-xs-6 top-btn">
+            <button class="save" type="submit">{{'S_button_save' | translate}}</button>
+            <button class="cancel" type="reset">{{'S_button_cancel' | translate}}</button>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 bus-con">
+        <div class="col-md-2 side-bar-con">
+            <div class="side-bar">
+                <div class="side-bar-header">
+                    <h5>{{'S_Online_main_heading' | translate}}</h5>
+                </div>
+                <div class="side-bar-links side-info online-info" ng-scrollbars rebuild-on-resize>
+                	<ul>
+                    	<li>
+                        	<a href="">{{'S_Online_info1' | translate}}
+                        		<i class="ic online-icn"></i>
+                            </a>
+                            <md-tooltip class="customtooltip angular-animate online-tooltip" md-direction="right">
+                                <span>{{'S_Online_info1-span' | translate}}</span>
+                           </md-tooltip>
+                        </li>
+                    	<li>
+                        	<a href="">{{'S_Online_info2' | translate}}
+                            	<i class="ic patients"></i>
+                            </a>
+                            <md-tooltip class="customtooltip angular-animate online-tooltip" md-direction="right">
+                                <span>{{'S_Online_info2-span' | translate}}</span>
+                           </md-tooltip>
+                        </li>
+                    	<li>
+                        	<a href="">{{'S_Online_info3' | translate}}
+                            <i class="ic how-to"></i>
+                            </a> 
+                            <md-tooltip class="customtooltip angular-animate online-tooltip" md-direction="right">
+                                <span>{{'S_Online_info3-span' | translate}}</span>
+                           </md-tooltip>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" col-md-10 col-sm-10 form-content info-container " ng-scrollbars rebuild-on-resize>
+    	<div class="col-md-6">
+        	<h2>{{'S_Online_heading_online' | translate}}</h2>
+            <div class="form-group check-con online show">
+                <label>{{'S_Online_label_turn' | translate}}</label>
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox" ng-model="booking_info.allow_online"><span></span> <p>{{'S_Online_label_turn-checkbox' | translate}}</p>
+                    </label>
+                </div>
+           </div>
+           <div class="form-group booking">
+                <label>{{'S_Online_label_address' | translate}}</label>
+                <a href="{{booking_info.show_address}}" target="blank" class="comp-url" ng-show="booking_info.allow_online">{{booking_info.show_address}}</a>
+                <p ng-show="!booking_info.allow_online">{{'S_Online_not-enable' | translate}}</p>
+           </div>
+           <div class="form-group booking">
+                <label>{{'S_Online_label_gacode' | translate}}</label>
+                <input type="text" class="form-control" placeholder="e.g. UA-XXXXXXX-Y" ng-model="booking_info.ga_code">
+           </div>
+           <div class="form-group booking clear">
+                <label>{{'S_Online_label_maxi' | translate}}</label>
+                <select class="form-control" ng-model="booking_info.min_appointment">
+                <option ng-repeat="n in range(1,5)">{{n}}</option>
+                <option>{{'S_Online_option_unlimited' | translate}}</option>
+                </select>
+                <i class="ic info info-hover booking-info">
+                    <span>{{'S_Online_option_unlimited-info' | translate}}</span>
+                </i>
+           </div>
+            <div class="form-group check-con online show">
+                <label>{{'S_Online_label-showprice' | translate}}</label>
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox" ng-model="booking_info.show_price"><span></span> {{'S_Online_label-showprice_option' | translate}}
+                    </label>
+                </div>
+           </div>
+           <div class="form-group check-con online show">
+                <label>{{'S_Online_label-hideprice' | translate}}
+                	<i class="ic info info-hover">
+                        <span>{{'S_Online_label-hideprice_info' | translate}}</span>
+                    </i>
+                </label>
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox" ng-model="booking_info.hide_end_time"><span></span> {{'S_Online_label-hideprice_option' | translate}}
+                    </label>
+                </div>
+           </div>
+           <div class="form-group check-con online show">
+                <label>{{'S_Online_label-showdob' | translate}}</label>
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox" ng-model="booking_info.show_dob"><span></span> {{'S_Online_label-showdob-option' | translate}}
+                    </label>
+                </div>
+           </div>
+           <div class="form-group check-con online show">
+                <label>{{'S_Online_label-Require' | translate}}</label>
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox" ng-model="booking_info.req_patient_addr"><span></span> {{'S_Online_label-Require-option' | translate}}
+                    </label>
+                </div>
+           </div>
+        </div>
+    	<div class="col-md-6">
+        	<h2 class="blank">&nbsp;</h2>
+        	 <div class="form-group booking">
+                <label class="side-label">{{'S_Online_label-min' | translate}}
+                    <i class="ic info info-hover">
+                        <span>{{'S_Online_label-min-info' | translate}}</span>
+                    </i>
+                </label>
+                <select class="form-control" ng-model="booking_info.min_cancel_appoint_time">
+                	<option value="1h">1 {{'S_Online_label-min-option1' | translate}}</option>
+                    <option value="2h">2 {{'S_Online_label-min-option2' | translate}}</option>
+                    <option value="4h">4 {{'S_Online_label-min-option2' | translate}}</option>
+                    <option value="6h">6 {{'S_Online_label-min-option2' | translate}}</option>
+                    <option value="5h">12 {{'S_Online_label-min-option2' | translate}}</option>
+                    <option value="1d">1 {{'S_Online_label-min-option3' | translate}}</option>
+                    <option value="2d">2 {{'S_Online_label-min-option4' | translate}}</option>
+                    <option value="3d">3 {{'S_Online_label-min-option4' | translate}}</option>
+                    <option value="4d">4 {{'S_Online_label-min-option4' | translate}}</option>
+                </select>
+           </div>
+           <div class="form-group booking clear-it">
+                <label>{{'S_Online_label-min-advance' | translate}}
+                    <i class="ic info info-hover right-side">
+                        <span>{{'S_Online_label-min-advance-info' | translate}}</span>
+                    </i>
+                </label>
+                <select class="form-control" ng-model="booking_info.advance_booking_time">
+                	<option value="1h">1 {{'S_Online_label-min-option1' | translate}}</option>
+                    <option value="2h">2 {{'S_Online_label-min-option2' | translate}}</option>
+                    <option value="4h">4 {{'S_Online_label-min-option2' | translate}}</option>
+                    <option value="tomorrow">{{'S_Online_label-min-option5' | translate}}</option>
+                    <option value="2d">2 {{'S_Online_label-min-option4' | translate}}</option>
+                </select>
+           </div>
+           <div class="form-group booking">
+
+                <label  class="">{{'S_Online_label-logo' | translate}}
+                    <i class="ic info info-hover">
+                        <span>{{'S_Online_label-logo-info' | translate}}</span>
+                    </i>
+                       </label>
+                       <div class="clearfix">
+                        <div class="img-con">
+                            <img ng-src="{{booking_info.logo}}" alt="" ng-hide="OnlineBookingSetting.file.$valid"/>
+                          <img ng-show="OnlineBookingSetting.file.$valid" ngf-src="booking_info.logo"
+               class="thumb">
+                        </div>
+                    <input type="button" value="UPLOAD" ngf-select ng-model="booking_info.logo" name="file"    
+             accept="image/*" ngf-max-size="2MB" class="upload-btn" required>
+             
+                    </div>
+           </div>
+           <div class="form-group booking clear-it">
+                <label>{{'S_Online_label-booking-noti' | translate}}
+                    <i class="ic info info-hover">
+                        <span>{{'S_Online_label-booking-noti-info' | translate}}</span>
+                    </i>
+                </label>
+                <select class="form-control" ng-model="booking_info.notify_by" >
+                	<option value="None">{{'S_option_none' | translate}}</option>
+                    <option value="sms">{{'S_option_SMS' | translate}}</option>
+                    <option value="email">{{'S_option_email' | translate}}</option>
+                    <option value="sms_email">{{'S_option_sms_email' | translate}}</option>
+                </select>
+           </div>
+           <div class="form-group booking">
+                <label>{{'S_Online_label-time' | translate}}
+                    <i class="ic info info-hover">
+                        <span>{{'S_Online_label-time-info' | translate}}</span>
+                    </i>
+                </label>
+                <textarea class="form-control" ng-model="booking_info.time_sel_info"></textarea>
+           </div>
+           <div class="form-group booking">
+                <label>{{'S_Online_label-term' | translate}}
+                    <i class="ic info info-hover">
+                        <span>{{'S_Online_label-term-info' | translate}}</span>
+                    </i>
+                </label>
+                <textarea class="form-control" ng-model="booking_info.terms"></textarea>
+           </div>
+        </div>
+    </div>
+    </form>
+</div>

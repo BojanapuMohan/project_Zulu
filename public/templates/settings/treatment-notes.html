@@ -1,0 +1,66 @@
+<div class="dashboard-con settings">
+    <div class="top-container">
+        <div class="col-md-7 col-xs-5 top-links">
+            <div class="top-links-container" ng-include="'templates/settings/common/top-links.html'"></div>    
+        </div>
+        <div class="col-md-5 col-xs-7 top-btn btn4">
+            <button class="save" type="submit" ng-click="EditTemplate()" ng-disabled="editDisabled">{{'S_button_edit' | translate}}</button>
+            <button class="save" type="submit" form="templateForm" ng-disabled="updateDisabled" ng-hide="clonebtn">{{updateBtnTxt | translate}}</button>
+            <button ng-show="clonebtn" class="save" ng-click="cloneTemplate()" ng-disabled="updateDisabled">{{updateBtnTxt}}</button>
+            <button class="save" type="submit" ng-disabled="exportDisabled" ng-click="ExportData()">{{'S_button_export' | translate}}</button>
+            <button class="cancel" ng-click="treDelete('sm')" ng-disabled="cancelDislable" >{{cancelBtnTxt | translate}}</button>
+        </div>
+    </div>
+    <div class="col-md-2 col-sm-2 bus-con">
+        <div class="col-md-2 side-bar-con">
+            <div class="side-bar">
+                <div class="side-bar-header">
+                    <h5 class="with-two-icn">{{'S_Treatment_main_heading' | translate}}</h5>
+                    <a class="" ui-sref="settings.treatment-notes.new">
+                    	<i class="ic bus-icn tre"></i>
+                    	<span>{{'S_tool-tip-addnew' | translate}}</span>
+                    </a>
+                    <a class="" >
+                    	<i class="ic bus-icn tre-edit"  ngf-select="upload($files)" ngf-multiple="false"></i>
+                    	<span>{{'S_Treatment_import' | translate}}</span>
+                    </a>
+                </div>
+                <div class="side-bar-search">
+                    <form>
+                        <input type="text" class="form-control" placeholder="{{'S_placeholder-Search' | translate}}" ng-model="TemplateFilter" />
+                        <button type="submit" disabled="disabled"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="side-bar-links side-info billing-items treat-items" ng-scrollbarss rebuild-on-resize rebuild-on="rebuild:me">
+                	<ul>
+                    	<li ng-repeat="templates in TemplateNoteList | filter:{name : TemplateFilter}" >
+                        	<a href="" ui-sref="settings.treatment-notes.info({TnoteID:templates.id})" ui-sref-active="active">{{templates.name}}</a>
+                            <md-tooltip class="customtooltip angular-animate" md-direction="right">
+                                <ul>
+                                    <li><h6>{{'S_Treatment_sec_of' | translate}}</h6><p>{{templates.no_section}}</p></li>
+                                    <li><h6>{{'S_Treatment_que_of' | translate}}</h6><p>{{templates.no_quest}}</p></li>                
+                                    <li><h6>{{'S_Treatment_printing' | translate}}</h6><p>{{templates.option_list}}</p></li> 
+                                </ul>
+                              </md-tooltip>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class=" col-md-10 col-sm-10 form-content info-container " ng-scrollbars rebuild-on-resize rebuild-on="rebuild:me">
+    	<div ui-view></div>
+    </div>
+</div>
+
+<!-- Modal -->
+<script type="text/ng-template" id="DeleteModal.html">
+        <div class="modal-body confirm-body">
+			<div class="confirm">
+                <p>{{'S_Treatment_confirmation' | translate}}</p>
+                <a href="" ng-click="okdelete()">{{'S_button_confirm' | translate}}</a>
+                <a href="" ng-click="cancel()">{{'S_button_cancel' | translate}}</a>
+            </div>
+        </div>
+</script>

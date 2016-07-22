@@ -1,0 +1,404 @@
+
+<form ng-submit="PatientForm.$valid && CreatePatient(Patient)" id="" class="products contact"  name="PatientForm" novalidate   >
+<div class="col-md-6" >
+    <h3>&nbsp;</h3>
+</div>
+<div class="col-md-6 top-btn inner-btns product-save">
+    <button class="save">{{'S_button_save' | translate}}</button>
+    <button type="button" class="cancel" ng-click="new_patient_Hide()">{{'S_button_cancel' | translate}}</button>
+</div>
+<div class="col-md-12" ng-scrollbars>
+    <div class="col-sm-6">
+            <div class="col-sm-12">
+                <h2>Personal Information</h2>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Title</label>
+                    <select class="form-control" ng-model="Patient.title">
+                        <option value="dr">{{'S_UP_title1' | translate}}</option>
+                        <option value="mr">{{'S_UP_title2' | translate}}</option>
+                        <option value="mrs">{{'S_UP_title3' | translate}}</option>
+                        <option value="Miss">{{'S_UP_title4' | translate}}</option>
+                        <option value="Dr">{{'S_UP_title5' | translate}}</option>
+                        <option value="Master">{{'S_UP_title6' | translate}}</option>
+                        <option value="Professor">{{'S_UP_title7' | translate}}</option>
+                        <option value="Sir">{{'S_UP_title8' | translate}}</option>
+                        <option value="Lord">{{'S_UP_title9' | translate}}</option>
+                        <option value="Lady">{{'S_UP_title10' | translate}}</option>
+                        <option value="Dame">{{'S_UP_title11' | translate}}</option>
+                        <option value="Reverend">{{'S_UP_title12' | translate}}</option>
+                        <option value="Sister">{{'S_UP_title13' | translate}}</option>
+                        <option value="Rabbi">{{'S_UP_title14' | translate}}</option>
+                        <option value="King">{{'S_UP_title15' | translate}}</option>
+                        <option value="Zombie Lord">{{'S_UP_title16' | translate}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" class="form-control"  ng-model="Patient.first_name" required>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" class="form-control" ng-model="Patient.last_name" required>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <label>Date of Birth</label>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <select class="form-control" ng-model="Patient.dob_day">
+                        <option value="">Day</option>
+                        <option ng-repeat="n in range(1,31)">{{n}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <select class="form-control" ng-model="Patient.dob_month">
+                        <option  value="">Month</option>
+                        <option ng-repeat="n in range(1,12)">{{n}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <select class="form-control" ng-model="Patient.dob_year">
+                        <option  value="">Year</option>
+                        <option ng-repeat="n in range(1905,2015) |  orderBy:'n'">{{n}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Gender</label>
+                    <div class="form-group">
+                        <div class="row type">
+                            <div class="col-sm-4">
+                                <div class="form-group medi radio-con">
+                                    <div class="radio">
+                                        <label>
+                                          <input type="radio" ng-model="Patient.gender" name="test" value="Male"><span></span> Male
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group medi radio-con">
+                                    <div class="radio">
+                                        <label>
+                                          <input type="radio" ng-model="Patient.gender" name="test" value="Female"><span></span> Female
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group medi radio-con">
+                                    <div class="radio">
+                                        <label>
+                                          <input type="radio" ng-model="Patient.gender" name="test" value="Not Applicable"><span></span> Not Applicable
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <h2>related clients</h2>
+            </div>
+            <div class="col-sm-12">
+                <div class="row">
+                <div class="form-group more-contacts rel-client" ng-repeat="relatives in Patient.relationship">
+                    <div class="col-sm-5">
+                         <md-content class="md-padding">
+                               <md-autocomplete
+                                md-selected-item="relatives.patient"
+                                md-search-text=""
+                                md-items="item in PatientList"
+                                md-item-text="item.first_name+' '+item.last_name"
+                                placeholder="Search"
+                                md-min-length="0">
+                               <span md-highlight-text="searchText">{{item.first_name}}  {{item.last_name}}</span>
+                               <md-item-template>
+                                   <span md-highlight-text="searchTextp" md-highlight-flags="^i">{{item.first_name}} {{item.last_name}}</span>
+                               </md-item-template>
+                            </md-autocomplete>
+                        </md-content>
+                    </div>
+                    <div class="col-sm-4">
+                        <select class="form-control" ng-model="relatives.type">
+                            <option value="Parent">Parent</option>
+                            <option value="Child">Child</option>
+                            <option value="Sibling">Sibling</option>
+                            <option value="Partner">Partner</option>
+                            <option value="Spouse">Spouse</option>
+                            <option value="Relative">Relative</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3 con-rem">
+                        <a href="" ng-click="removeRelative($index)" class="remove"><i class="ic cross"></i> Remove</a>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <a href="" ng-click="addRelative()" class="add-btn"><i class="ic add"></i> Add New</a>
+                </div>
+            </div>  
+            </div> 
+            <div class="col-sm-12">
+                <h2>billing</h2>
+            </div>
+            <div class="col-sm-12">
+                <div class="row">
+                <div class="form-group con-type1">
+                    <div class="col-sm-5">
+                        <label>Concession Type</label>
+                        <select class="form-control" ng-model="Patient.concession_type">
+                            <option ng-repeat="concessions in ConcessionTypeList" value="{{concessions.id}}">{{concessions.name}}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-7">
+                        <label>Email Invoice To
+                            <i class="ic info info-hover">
+                                <span class="ng-binding">This is an additional email address you can send invoices to (separate to the client).</span>
+                            </i>
+                        </label>
+                        <input type="text" class="form-control" ng-model="Patient.invoice_email">
+                    </div>
+                </div>
+            </div>  
+            </div> 
+            <div class="clearfix"></div>
+            <div class="col-sm-12 mess">
+                <div class="form-group">
+                    <label>Invoice To
+                        <i class="ic info info-hover left-side">
+                            <span class="ng-binding">This is the default used on new invoices. Client name and address will be used if left blank.</span>
+                        </i>
+                    </label>
+                    <textarea class="form-control" ng-model="Patient.invoice_to"></textarea>
+                </div>
+            </div>
+            <div class="col-sm-12 mess">
+                <div class="form-group">
+                    <label>Invoice Extra Information</label>
+                    <textarea class="form-control" ng-model="Patient.invoice_extra_info"></textarea>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <h2>other information</h2>
+            </div>
+            <div class="col-sm-6 ">
+                <div class="form-group" >
+                    <label>Occupation</label>
+                    <input type="text" class="form-control" ng-model="Patient.occupation">
+                </div>
+            </div>
+            <div class="col-sm-6 ">
+                <div class="form-group" >
+                    <label>Emergency contact</label>
+                    <input type="text" class="form-control" ng-model="Patient.emergancy_contact">
+                </div>
+            </div>
+            <div class="col-sm-6 ">
+                <div class="form-group" >
+                    <label>Medicare Number</label>
+                    <input type="text" class="form-control"  ng-model="Patient.medicare_number">
+                </div>
+            </div>
+            <div class="col-sm-6 ">
+                <div class="form-group" >
+                    <label>Reference Number</label>
+                    <input type="text" class="form-control"  ng-model="Patient.reference_number">
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group reff-docter rel-client">
+                    <label>Referring Doctor</label>
+                    <div class="clearfix"></div>
+                            <md-content class="md-padding" ng-if="DoctorList.length">
+                               <md-autocomplete
+                                md-selected-item="Patient.refer_doctor"
+                                md-search-text=""
+                                md-items="item in DoctorList"
+                                md-item-text="item.first_name +' '+ item.last_name"
+                                placeholder="Search"
+                                md-min-length="0">
+                               <span md-highlight-text="searchText">{{item.first_name}} {{item.last_name}}</span>
+                              <md-item-template>
+                                  <span md-highlight-text="searchTextp" md-highlight-flags="^i">{{item.first_name}} {{item.last_name}}</span>
+                            </md-item-template>
+                            </md-autocomplete>
+                        </md-content >
+                    <p ng-if="!DoctorList.length">You do not have any <a href="#">Contacts</a> of type "Doctor"</p>
+               </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group mess">
+                    <label>Note</label>
+                    <textarea class="form-control" ng-model="Patient.notes"></textarea>
+               </div>
+            </div>
+            
+    </div>
+    <div class="col-sm-6">
+            <div class="col-sm-12">
+                <h2>Contact Information</h2>
+            </div>
+            <div class="col-sm-12">
+                <div class="row">
+                <label class="col-sm-12">Phone Number</label>
+                <div class="form-group more-contacts" ng-repeat="phoneNum in Patient.phone_list">
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" ng-model="phoneNum.contact_no"/>
+                    </div>
+                    <div class="col-sm-4">
+                        <select class="form-control" ng-model="phoneNum.type">
+                            <option value="mobile">Mobile</option>
+                            <option value="home">Home</option>
+                            <option value="work">Work</option>
+                            <option value="fax">Fax</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-3 con-rem">
+                        <a href="" ng-click="removePhone($index)" class="remove"><i class="ic cross"></i> Remove</a>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <a href="" ng-click="addPhone()" class="add-btn"><i class="ic add"></i> Add New</a>
+                </div>
+            </div>  
+            </div>  
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" ng-model="Patient.email"/>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <h2>Address</h2>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group mess">
+                    <textarea  ng-model="Patient.address" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label>Country</label>
+                    <select  ng-model="Patient.country"  class="form-control" ng-change="GetStates(Patient.country)"  ng-model="cntry">
+                       <option ng-selected="" ng-repeat="countries in country" value="{{countries.code}}">{{countries.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>State</label>
+                    <select ng-model="Patient.state"  class="form-control">
+                       <option ng-selected="" ng-repeat="states in state" value="{{states.code}}">{{states.name}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="text" class="form-control" ng-model="Patient.city"/>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <label>Postal Code</label>
+                    <input type="text" class="form-control" ng-model="Patient.post_code"/>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <h2>communication preferences</h2>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Automated Reminder Type</label>
+                    <select ng-model="Patient.reminder_type"  class="form-control">
+                       <option value="">None</option>
+                       <option value="SMS">SMS</option>
+                       <option value="Email">Email</option>
+                       <option value="SMS & Email">SMS & Email</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="form-group check-con online show">
+                    <label class="ng-binding">Unsubscribe from SMS marketing</label>
+                    <div class="checkbox">
+                        <label>
+                          <input type="checkbox" ng-model="Patient.sms_marketing" class=""><span></span> 
+                          <p>Unsubscribed clients will not receive bulk SMS messages</p>
+                        </label>
+                    </div>
+               </div>
+            </div>
+            <div class="col-sm-12">
+                <h2>Referral source (for marketing)</h2>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Referral Type</label>
+                    <select ng-model="Patient.referral_type"  class="form-control">
+                       <option value="">None</option>
+                       <option value="Client">Client</option>
+                       <option value="Contact">Contact</option>
+                       <option value="Email Marketing">Email Marketing</option>
+                       <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group" ng-if="Patient.referral_type == 'Contact'">
+                     <label>Referrer</label>
+                    <md-content class="md-padding">
+                               <md-autocomplete
+                                md-selected-item="Patient.referrer"
+                                md-search-text=""
+                                md-items="item in ContactList"
+                                md-item-text="item.first_name +' '+ item.last_name"
+                                placeholder="Search"
+                                md-min-length="0">
+                               <span md-highlight-text="searchText">{{item.first_name}} {{item.last_name}}</span>
+                              <md-item-template>
+                                  <span md-highlight-text="searchTextp" md-highlight-flags="^i">{{item.first_name}} {{item.last_name}}</span>
+                            </md-item-template>
+                            </md-autocomplete>
+                        </md-content >
+                </div>
+
+                <div class="form-group" ng-if="Patient.referral_type == 'Client'">
+                    <label>Referrer</label>
+                    <md-content class="md-padding">
+                               <md-autocomplete
+                                md-selected-item="Patient.referrer"
+                                md-search-text=""
+                                md-items="item in PatientList"
+                                md-item-text="item.first_name +' '+ item.last_name"
+                                placeholder="Search"
+                                md-min-length="0">
+                               <span md-highlight-text="searchText">{{item.first_name}} {{item.last_name}}</span>
+                              <md-item-template>
+                                  <span md-highlight-text="searchTextp" md-highlight-flags="^i">{{item.first_name}} {{item.last_name}}</span>
+                            </md-item-template>
+                            </md-autocomplete>
+                        </md-content >
+                </div>
+                 <div class="form-group" ng-if="!!Patient.referral_type">
+                    <label>Extra information</label>
+                    <input type="text" class="form-control" ng-model="Patient.extra_info"/>
+                </div>
+            </div>
+    </div>
+ </div>
+</form>
+        

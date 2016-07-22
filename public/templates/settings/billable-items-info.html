@@ -1,0 +1,43 @@
+<form id="BilableForm" ng-submit="BilableForm.$valid && BilableSubmit(BilableItems);" novalidate name="BilableForm">
+<div class="col-md-6 checkup">
+        	<h2>{{'S_Billable_heading_editing' | translate}}</h2>
+              <div class="form-group">
+                <label>{{'S_Billable_label_item-code' | translate}}</label>
+                <input type="text" class="form-control" placeholder="" ng-model="BilableItems.item_code"> 
+              </div>
+              <div class="form-group">
+                <label>{{'S_label_name' | translate}}</label>
+                <input type="text" ng-model="BilableItems.name" class="form-control" placeholder="Initial consultation and Treatment" required>
+              </div>
+              <div class="form-group col-xs-4 city-con">
+                <label>{{'S_Billable_label_Price' | translate}}</label>
+                <input type="text" class="form-control" placeholder="$ 100.0" ng-model="BilableItems.price" pattern="\d*" required>
+              </div>
+              <div class="form-group col-xs-8 city-con city-con1">
+                <label>{{'S_Billable_label_Tax' | translate}}</label>
+                <select class="form-control" ng-model="BilableItems.tax">
+                    <option value="N/A">N/A</option>
+                    <option ng-repeat="tax in taxList" value="{{tax.id}}">{{tax.name}}-{{tax.amount}}</option>
+                </select>
+              </div>
+              <div class="form-group check-con online-booking">
+                <div class="checkbox">
+                    <label>
+                      <input type="checkbox" ng-model="BilableItems.include_tax" ng-disabled="BilableItems.tax == 'N/A'"><span></span> {{'S_Billable_label_price-includes-tax' | translate}}
+                    </label>
+                </div>
+              </div>
+        </div>
+    	<div class="col-md-6">
+            <h2 class="hv-info">{{'S_Billable_heading_Concession_Prices' | translate}}
+            	<i class="ic info info-hover bottom">
+                    <span>{{'S_Billable_info-message1' | translate}}</span>
+                </i>
+            </h2>
+            <div class="form-group clearfix" ng-repeat="concession in BilableItems.concession_price">
+                <label>{{concession.name}}</label>
+                <input type="text" class="form-control" pattern="\d*" placeholder="$100" ng-model="concession.value">
+            </div>
+             
+            </div>
+</form>

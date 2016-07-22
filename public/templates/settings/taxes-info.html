@@ -1,0 +1,16 @@
+<form id="TaxForm" ng-submit="TaxForm.$valid && TaxSubmit(TaxData);" novalidate name="TaxForm">
+<div class="col-md-6">
+        	<h2>{{'S_Taxes_heading_Editing_GST' | translate}}</h2>
+              <div class="form-group name-con">
+                <label>{{'S_label_name' | translate}}</label>
+                <input type="text" class="form-control" placeholder="{{'S_placeholder-GST' | translate}}" required ng-model="TaxData.name">
+              </div>
+              <div class="form-group tax-amount">
+                <label>{{'S_Taxes_label_amount' | translate}}</label>
+                <input type="text" class="form-control" placeholder="10.0" pattern="\d*" ng-model="TaxData.amount" required>
+                <span>%</span>
+              </div>
+        </div>
+    	<div class="col-md-6">
+        </div>
+      </form>
